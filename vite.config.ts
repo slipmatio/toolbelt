@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import * as path from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import pkg from './package.json'
@@ -24,11 +24,6 @@ export default defineConfig({
       // logDiagnostics: true,
     }),
   ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
 
   test: {
     include: ['tests/unit/**/*.{test,spec}.ts'],
@@ -37,16 +32,18 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        index: 'src/index.ts',
-        browser: 'src/browser.ts',
+        index: resolve(__dirname, 'src/index.ts'),
+        browser: resolve(__dirname, 'src/browser.ts'),
       },
-      output: [
-        {
-          dir: path.resolve(__dirname, 'dist'),
-          format: 'es',
-          entryFileNames: '[name].[format].js',
-        },
-      ],
+      external: ['vue'],
+      output: {
+        dir: resolve(__dirname, 'dist'),
+        format: 'es',
+        entryFileNames: '[name].[format].js',
+        // globals: {
+        //   vue: 'Vue',
+        // },
+      },
     },
     emptyOutDir: true,
     sourcemap: true,

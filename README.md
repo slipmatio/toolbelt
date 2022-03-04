@@ -1,5 +1,15 @@
 # Slipmat Toolbelt
 
+General utilities for Web development
+
+## Features
+
+### @slipmatio/toolbelt/browser
+
+- `storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean`
+## Installation
+
+`yarn add @slipmatio/toolbelt`
 ## Development
 
 ### Install dependencies

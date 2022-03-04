@@ -28,5 +28,3 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boole
     )
   }
 }
-
-export default { storageAvailable }
