@@ -1,5 +1,7 @@
 # Slipmat Toolbelt
 
+**Note: this project is under active development (and untested), DO NOT USE**
+
 General utilities for Web development
 
 ## Features
