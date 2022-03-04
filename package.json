@@ -1,6 +1,6 @@
 {
   "name": "@slipmatio/toolbelt",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.6",
   "main": "dist/index.es.js",
   "module": "dist/index.es.js",
   "exports": {
@@ -8,7 +8,7 @@
       "import": "./dist/index.es.js"
     }
   },
-  "typings": "./dist/src/*.d.ts",
+  "typings": "./dist/index.d.ts",
   "repository": "https://github.com/slipmatio/toolbelt",
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
@@ -60,6 +60,7 @@
     "dist/index.es.js.map",
     "dist/browser.es.js",
     "dist/browser.es.js.map",
+    "dist/index.d.ts",
     "dist/src/index.d.ts",
     "dist/src/browser.d.ts",
     "README.md",

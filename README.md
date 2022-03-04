@@ -3,13 +3,19 @@
 General utilities for Web development
 
 ## Features
-
-### @slipmatio/toolbelt/browser
+### Browser
 
 - `storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean`
+- `getCookie(name: string): string | null`
+
 ## Installation
 
 `yarn add @slipmatio/toolbelt`
+
+## Usage
+
+`import { tool } from @slipmatio/toolbelt`
+
 ## Development
 
 ### Install dependencies

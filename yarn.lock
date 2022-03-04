@@ -1169,6 +1169,11 @@
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
+"@slipmatio/toolbelt@^0.0.1-alpha.4":
+  version "0.0.1-alpha.4"
+  resolved "https://registry.yarnpkg.com/@slipmatio/toolbelt/-/toolbelt-0.0.1-alpha.4.tgz#8e33468c5bde398c82b894b5a42d978e38b3c559"
+  integrity sha512-/FZAE7pjuv9VJyejXyQ4MUNLyKWdOPeKV28VQuAMq+NAdhlo/w3LJHcpoNsw/jfy2MyJUam3uH3INyIXyKsXZA==
+
 "@ts-morph/common@~0.12.3":
   version "0.12.3"
   resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.12.3.tgz#a96e250217cd30e480ab22ec6a0ebbe65fd784ff"

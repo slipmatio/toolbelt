@@ -1,4 +1,4 @@
-import { storageAvailable } from './browser'
+import { storageAvailable, getCookie } from './browser'
 
-export default { storageAvailable }
-module.exports = { storageAvailable }
+export { storageAvailable, getCookie }
+module.exports = { storageAvailable, getCookie }

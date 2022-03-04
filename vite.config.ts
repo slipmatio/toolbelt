@@ -19,6 +19,7 @@ export default defineConfig({
     }),
     dts({
       staticImport: true,
+      insertTypesEntry: true,
       // copyDtsFiles: false,
       // skipDiagnostics: false,
       // logDiagnostics: true,
