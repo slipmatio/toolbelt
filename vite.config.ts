@@ -19,7 +19,7 @@ export default defineConfig({
     }),
     dts({
       staticImport: true,
-      insertTypesEntry: true,
+      // insertTypesEntry: true,
       // copyDtsFiles: false,
       // skipDiagnostics: false,
       // logDiagnostics: true,
@@ -31,20 +31,10 @@ export default defineConfig({
   },
 
   build: {
-    rollupOptions: {
-      input: {
-        index: resolve(__dirname, 'src/index.ts'),
-        browser: resolve(__dirname, 'src/browser.ts'),
-      },
-      external: ['vue'],
-      output: {
-        dir: resolve(__dirname, 'dist'),
-        format: 'es',
-        entryFileNames: '[name].[format].js',
-        // globals: {
-        //   vue: 'Vue',
-        // },
-      },
+    lib: {
+      entry: './src/index.ts',
+      name: 'toolbelt',
+      fileName: (format) => `index.${format}.js`,
     },
     emptyOutDir: true,
     sourcemap: true,

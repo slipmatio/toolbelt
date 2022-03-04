@@ -1,3 +1,6 @@
+/**
+ * Checks whether the given Storage is available and usable.
+ */
 export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean {
   let storage: Storage
   if (type === 'localStorage') {
@@ -29,6 +32,9 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boole
   }
 }
 
+/**
+ * Returns the cookie as a string or null if not found.
+ */
 export function getCookie(name: string) {
   let cookieValue = null
   if (document.cookie && document.cookie !== '') {
