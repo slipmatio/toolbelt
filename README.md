@@ -7,8 +7,9 @@ General utilities for Web development
 ## Features
 ### Browser
 
-- `storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean`
+- `copyToClipboard(content: string): boolean`
 - `getCookie(name: string): string | null`
+- `storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean`
 
 ## Installation
 

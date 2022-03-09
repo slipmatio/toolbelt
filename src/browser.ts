@@ -50,3 +50,22 @@ export function getCookie(name: string) {
   }
   return cookieValue
 }
+
+/**
+ * Simple clipboard copy for modern browsers. Returns true if successful.
+ */
+export function copyToClipboard(content: string) {
+  const d = document
+  try {
+    const el = document.createElement('input')
+    el.setAttribute('style', 'opacity:0;')
+    el.setAttribute('value', content)
+    d.body.appendChild(el)
+    el.select()
+    d.execCommand('copy')
+    d.body.removeChild(el)
+    return true
+  } catch {
+    return false
+  }
+}

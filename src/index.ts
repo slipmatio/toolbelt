@@ -1,1 +1,1 @@
-export { storageAvailable, getCookie } from './browser'
+export { storageAvailable, getCookie, copyToClipboard } from './browser'
