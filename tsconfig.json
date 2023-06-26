@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["happy-dom", "vitest/globals"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "!src/**/*.spec.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

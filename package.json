@@ -14,10 +14,12 @@
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "dev": "DEBUG=0 vite",
+    "build": "DEBUG=0 vue-tsc && vite build",
+    "test": "DEBUG=0 vitest",
+    "test:e2e": "DEBUG=0 playwright test --ui",
+    "test:ci-e2e": "DEBUG=0 playwright test",
+    "coverage": "DEBUG=0 vitest run --coverage"
   },
   "devDependencies": {
     "@playwright/test": "1.35.1",

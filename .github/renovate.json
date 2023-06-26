@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "config:base",
+    "group:all",
+    "schedule:weekly",
+    ":automergePr",
+    ":widenPeerDependencies",
+    "schedule:automergeWeekly"
+  ],
+  "enabledManagers": [
+    "npm"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "automerge": true,
+      "stabilityDays": 2
+    },
+    {
+      "matchPackagePatterns": [
+        "npm"
+      ],
+      "rangeStrategy": "auto"
+    }
+  ],
+  "timezone": "Europe/Helsinki",
+  "dependencyDashboard": true
+}
