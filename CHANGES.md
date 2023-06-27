@@ -3,6 +3,7 @@
 ## 0.1.0 (2023-06-27)
 
 - Refactor: revamp whole repo to match Slipmat standards.
+- Chore: added basic tests.
 
 ## 0.0.4 (2022-03-09)
 
