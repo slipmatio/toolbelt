@@ -1,6 +1,6 @@
 # Slipmat Toolbelt
 
-**Note: this project is under active development (and untested), DO NOT USE**
+**Note: this project is under active development, DO NOT USE IN PRODUCTION**
 
 General utilities for Web development
 
@@ -13,7 +13,7 @@ General utilities for Web development
 
 ## Installation
 
-`yarn add @slipmatio/toolbelt`
+`pnpm add @slipmatio/toolbelt`
 
 ## Usage
 
@@ -23,15 +23,15 @@ General utilities for Web development
 
 ### Install dependencies
 
-`yarn`
+`pnpm i`
 
 ### Run development server
 
-`yarn dev`
+`pnpm dev`
 
 ### Run tests
 
-`yarn test`
+`pnpm test`
 
 ## Contributing
 

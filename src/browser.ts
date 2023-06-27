@@ -36,7 +36,7 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boole
  * Returns the cookie as a string or null if not found.
  */
 export function getCookie(name: string) {
-  let cookieValue = null
+  let cookieValue = ''
   if (document.cookie && document.cookie !== '') {
     const cookies = document.cookie.split(';')
     for (let i = 0; i < cookies.length; i++) {
@@ -48,7 +48,12 @@ export function getCookie(name: string) {
       }
     }
   }
-  return cookieValue
+  // Infering the output type doesn't work properly w/o this 🤷‍♂️
+  if (cookieValue.length > 0) {
+    return cookieValue
+  } else {
+    return null
+  }
 }
 
 /**

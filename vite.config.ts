@@ -1,42 +1,27 @@
-/// <reference types="vitest" />
 import { resolve } from 'path'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import pkg from './package.json'
 import dts from 'vite-plugin-dts'
-
-process.env.VITE_APP_VERSION = pkg.version
-if (process.env.NODE_ENV === 'production') {
-  process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString()
-}
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [
-    vue({
-      script: {
-        refSugar: true,
-      },
-    }),
-    dts({
-      staticImport: true,
-      // insertTypesEntry: true,
-      // copyDtsFiles: false,
-      // skipDiagnostics: false,
-      // logDiagnostics: true,
-    }),
-  ],
-
-  test: {
-    include: ['tests/unit/**/*.{test,spec}.ts'],
-  },
-
+  plugins: [vue(), dts()],
   build: {
-    lib: {
-      entry: './src/index.ts',
-      name: 'toolbelt',
-      fileName: (format) => `index.${format}.js`,
-    },
     emptyOutDir: true,
-    sourcemap: true,
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'toolbelt',
+      fileName: 'toolbelt',
+      formats: ['es', 'cjs'],
+    },
+  },
+  test: {
+    globals: true,
+    include: ['tests/unit/**/*.{test,spec}.ts', 'src/**/*.spec.ts'],
+    environment: 'happy-dom',
+    coverage: {
+      exclude: ['__mocks__/*', 'tests/*', '**/*.spec.ts'],
+      provider: 'v8',
+      reporter: ['text', 'json', 'json-summary'],
+    },
   },
 })
