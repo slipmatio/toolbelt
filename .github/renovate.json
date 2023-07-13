@@ -3,9 +3,7 @@
     "config:base",
     "group:all",
     "schedule:weekly",
-    ":automergePr",
-    ":widenPeerDependencies",
-    "schedule:automergeWeekly"
+    ":widenPeerDependencies"
   ],
   "enabledManagers": [
     "npm"
