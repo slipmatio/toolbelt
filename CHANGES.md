@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 (2023-07-17)
+
+- Fix: export types correctly.
+- Chore: bumped deps.
+
 ## 0.1.0 (2023-06-27)
 
 - Refactor: revamp whole repo to match Slipmat standards.

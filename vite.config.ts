@@ -4,7 +4,14 @@ import dts from 'vite-plugin-dts'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [vue(), dts()],
+  plugins: [
+    vue(),
+    dts({
+      copyDtsFiles: true,
+      rollupTypes: true,
+      insertTypesEntry: true,
+    }),
+  ],
   build: {
     emptyOutDir: true,
     lib: {
