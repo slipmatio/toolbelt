@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2023-07-17)
+
+- CI: create tags and releases on publish.
+
 ## 0.1.1 (2023-07-17)
 
 - Fix: export types correctly.
