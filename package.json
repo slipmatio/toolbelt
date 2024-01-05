@@ -1,14 +1,14 @@
 {
   "name": "@slipmatio/toolbelt",
   "type": "module",
-  "version": "0.2.0",
-  "main": "dist/toolbelt.js",
-  "module": "dist/toolbelt.mjs",
+  "version": "0.2.1",
+  "main": "dist/toolbelt.umd.cjs",
+  "module": "dist/toolbelt.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/toolbelt.mjs",
-      "require": "./dist/toolbelt.js"
+      "import": "./dist/toolbelt.js",
+      "require": "./dist/toolbelt.umd.cjs"
     }
   },
   "typings": "./dist/index.d.ts",

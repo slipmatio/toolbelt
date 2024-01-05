@@ -19,7 +19,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'toolbelt',
       fileName: 'toolbelt',
-      formats: ['es', 'cjs'],
+      formats: ['es', 'umd'],
     },
     rollupOptions: {
       external: ['vue', 'vue-router'],
