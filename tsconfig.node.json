@@ -1,11 +1,11 @@
 {
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "include": ["vite.config.*", "vitest.config.*", "playwright.config.*"],
   "compilerOptions": {
     "composite": true,
-    "skipLibCheck": true,
+    "noEmit": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
-    "types": ["node", "happy-dom", "vitest/globals"]
-  },
-  "include": ["vite.config.ts", "package.json"]
+    "moduleResolution": "Bundler",
+    "types": ["node"]
+  }
 }

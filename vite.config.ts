@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
 import { defineConfig } from 'vitest/config'
+// import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
@@ -19,6 +20,15 @@ export default defineConfig({
       name: 'toolbelt',
       fileName: 'toolbelt',
       formats: ['es', 'cjs'],
+    },
+    rollupOptions: {
+      external: ['vue', 'vue-router'],
+      output: {
+        globals: {
+          'vue': 'Vue',
+          'vue-router': 'VueRouter',
+        },
+      },
     },
   },
   test: {
