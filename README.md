@@ -5,11 +5,16 @@
 General utilities for Web development
 
 ## Features
+
 ### Browser
 
 - `copyToClipboard(content: string): boolean`
 - `getCookie(name: string): string | null`
 - `storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean`
+
+### Vue
+
+- `getNextPath(): string` - returns the value of `?next` query param or `/`
 
 ## Installation
 

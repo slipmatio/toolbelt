@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 (2024-01-05)
+
+- Feat: added `getNextPath`
+- Refactor: refactored internals
+- Chore: bumped deps.
+
 ## 0.1.2 (2023-07-17)
 
 - CI: create tags and releases on publish.

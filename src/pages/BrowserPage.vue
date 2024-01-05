@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { copyToClipboard, getCookie, storageAvailable } from './browser'
+import { copyToClipboard, getCookie, storageAvailable } from '../browser'
 
 const clipboardText = 'clipboard works'
 
