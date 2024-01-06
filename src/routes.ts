@@ -1,11 +1,17 @@
-import { useRoute } from 'vue-router'
+import { useRoute, type Router, type RouteLocationNormalizedLoaded } from 'vue-router'
 import { isString } from './type-helpers'
 
 /**
  * Helper for figuring our ?next= query param in a safe way.
+ * Pass the router instance whenever not used directly from script setup block.
  */
-export function getNextPath(): string {
-  const route = useRoute()
+export function getNextPath(router?: Router): string {
+  let route: RouteLocationNormalizedLoaded
+  if (router) {
+    route = router.currentRoute.value
+  } else {
+    route = useRoute()
+  }
 
   let next = '/'
   if (

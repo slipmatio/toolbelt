@@ -1,9 +1,17 @@
 # Changelog
 
+## 0.2.2 (2024-01-05)
+
+- Feat: allow passing Router instance to `getNextPath`.
+
+## 0.2.1 (2024-01-05)
+
+- Fix: package.json is now more Vite -compatible.
+
 ## 0.2.0 (2024-01-05)
 
-- Feat: added `getNextPath`
-- Refactor: refactored internals
+- Feat: added `getNextPath`.
+- Refactor: refactored internals.
 - Chore: bumped deps.
 
 ## 0.1.2 (2023-07-17)

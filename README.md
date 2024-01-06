@@ -14,7 +14,7 @@ General utilities for Web development
 
 ### Vue
 
-- `getNextPath(): string` - returns the value of `?next` query param or `/`
+- `getNextPath(router?: Router): string` - returns the value of `?next` query param or `/`
 
 ## Installation
 
