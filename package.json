@@ -25,21 +25,21 @@
     "type-check": "DEBUG=0 vue-tsc --build --force"
   },
   "devDependencies": {
-    "@playwright/test": "1.45.2",
+    "@playwright/test": "1.45.3",
     "@tsconfig/node20": "20.1.4",
-    "@types/node": "20.14.11",
-    "@vitejs/plugin-vue": "5.0.5",
-    "@vitest/coverage-v8": "2.0.3",
+    "@types/node": "20.14.12",
+    "@vitejs/plugin-vue": "5.1.0",
+    "@vitest/coverage-v8": "2.0.4",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.5.1",
     "happy-dom": "14.12.3",
-    "typescript": "5.5.3",
-    "vite": "5.3.4",
+    "typescript": "5.5.4",
+    "vite": "5.3.5",
     "vite-plugin-dts": "3.9.1",
-    "vitest": "2.0.3",
-    "vue": "3.4.33",
+    "vitest": "2.0.4",
+    "vue": "3.4.34",
     "vue-router": "4.4.0",
-    "vue-tsc": "2.0.26"
+    "vue-tsc": "2.0.29"
   },
   "files": [
     "dist",
