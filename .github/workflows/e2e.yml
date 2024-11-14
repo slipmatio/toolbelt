@@ -32,20 +32,20 @@ jobs:
       PLAYWRIGHT_BROWSERS_PATH: 0
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/cache@v4.1.2
         with:
           path: /home/runner/.local/share/pnpm/store
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v2.4.1
         with:
-          version: 8
+          version: 9
           run_install: true
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4.1.0
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - name: Install Playwright browsers
@@ -54,7 +54,7 @@ jobs:
       - name: Run e2e tests
         run: pnpm test:ci-e2e
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4.4.3
         if: always()
         with:
           name: playwright-report

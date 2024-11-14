@@ -1,7 +1,33 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { getNextPath } from '../routes'
+import { testUrls } from '../testurls'
 
-const nextPath = getNextPath()
-console.log(`nextPath: ${nextPath}`)
+const nextPath = ref(getNextPath())
+console.log(`nextPath: ${nextPath.value}`)
+
+function go(url: string) {
+  location.href = url
+}
 </script>
-<template></template>
+<template>
+  <p>
+    Next path: <span data-testid="path">{{ nextPath }}</span>
+  </p>
+
+  <div>
+    <p>
+      <button
+        v-for="testObj in testUrls"
+        :data-testid="testObj.testid"
+        @click.prevent="go(testObj.url)"
+        :key="testObj.url">
+        Test {{ testObj.url }}
+      </button>
+    </p>
+  </div>
+
+  <div>
+    <p>Back <router-link to="/">to home</router-link></p>
+  </div>
+</template>

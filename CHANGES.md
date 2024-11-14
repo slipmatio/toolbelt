@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 (2024-11-14)
+
+- Enhancement: made tests better, added Python api for proper local testing.
+
 ## 0.2.2 (2024-01-05)
 
 - Feat: allow passing Router instance to `getNextPath`.
