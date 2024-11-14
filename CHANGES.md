@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2024-11-14)
+
+- Fix: fixed async tests.
+
 ## 0.3.0 (2024-11-14)
 
 - Enhancement: made tests better, added Python api for proper local testing.

@@ -1,6 +1,6 @@
 {
   "extends": ["config:recommended", "group:all", "schedule:weekly", ":widenPeerDependencies"],
-  "enabledManagers": ["npm"],
+  "enabledManagers": ["pep621", "npm", "github-actions"],
   "packageRules": [
     {
       "matchManagers": ["npm"],
@@ -10,6 +10,10 @@
     {
       "rangeStrategy": "auto",
       "matchPackageNames": ["/npm/"]
+    },
+    {
+      "matchPackagePatterns": ["github-actions"],
+      "automerge": true
     }
   ],
   "timezone": "Europe/Helsinki",
