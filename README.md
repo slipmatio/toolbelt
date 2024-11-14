@@ -34,9 +34,20 @@ General utilities for Web development
 
 `pnpm dev`
 
-### Run tests
+### Testing
 
-`pnpm test`
+#### Unittests
+
+1. `pnpm test`
+
+#### E2E
+
+1. Run the backend: `uv run uvicorn api:app --reload`
+2. `pnpm test:e2e`
+
+### Publishing
+
+Bump version number in `package.json`, merge to main.
 
 ## Contributing
 
