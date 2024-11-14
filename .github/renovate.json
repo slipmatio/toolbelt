@@ -1,19 +1,34 @@
 {
-  "extends": ["config:recommended", "group:all", "schedule:weekly", ":widenPeerDependencies"],
-  "enabledManagers": ["pep621", "npm", "github-actions"],
+  "extends": [
+    "config:recommended",
+    "group:all",
+    "schedule:weekly",
+    ":widenPeerDependencies"
+  ],
+  "enabledManagers": [
+    "pep621",
+    "npm",
+    "github-actions"
+  ],
   "packageRules": [
     {
-      "matchManagers": ["npm"],
+      "matchManagers": [
+        "npm"
+      ],
       "automerge": true,
       "minimumReleaseAge": "2 days"
     },
     {
       "rangeStrategy": "auto",
-      "matchPackageNames": ["/npm/"]
+      "matchPackageNames": [
+        "/npm/"
+      ]
     },
     {
-      "matchPackagePatterns": ["github-actions"],
-      "automerge": true
+      "automerge": true,
+      "matchPackageNames": [
+        "/github-actions/"
+      ]
     }
   ],
   "timezone": "Europe/Helsinki",
