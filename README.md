@@ -22,7 +22,9 @@ General utilities for Web development
 
 ## Usage
 
-`import { tool } from @slipmatio/toolbelt`
+Browser tools: `import { tool } from @slipmatio/toolbelt`
+
+Vue tools (`vue` and `vue-router` required): `import { tool } from @slipmatio/toolbelt/vue`
 
 ## Development
 
