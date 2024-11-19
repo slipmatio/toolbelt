@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getNextPath } from '../routes'
 import { testUrls } from '../testurls'
+import { getNextPath } from '../vue'
 
 const nextPath = ref(getNextPath())
 console.log(`nextPath: ${nextPath.value}`)

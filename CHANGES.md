@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 (2024-11-20)
+
+- Refactor: moved Vue tools into `@slipmatio/toolbelt/vue` package.
+
 ## 0.3.2 (2024-11-19)
 
 - Fix: added `vue` and `vue-router` as peer dependencies.
