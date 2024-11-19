@@ -1,4 +1,5 @@
-import { useRoute, type Router, type RouteLocationNormalizedLoaded } from 'vue-router'
+import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { isString } from './type-helpers'
 
 /**
@@ -14,12 +15,7 @@ export function getNextPath(router?: Router): string {
   }
 
   let next = '/'
-  if (
-    route.query &&
-    route.query.next &&
-    isString(route.query.next) &&
-    route.query.next.startsWith('/')
-  ) {
+  if (route.query && route.query.next && isString(route.query.next) && route.query.next.startsWith('/')) {
     next = route.query.next as string
   }
   return next

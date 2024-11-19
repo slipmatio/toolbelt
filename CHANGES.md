@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2 (2024-11-19)
+
+- Fix: added `vue` and `vue-router` as peer dependencies.
+
 ## 0.3.1 (2024-11-14)
 
 - Fix: fixed async tests.

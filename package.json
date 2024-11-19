@@ -1,14 +1,14 @@
 {
   "name": "@slipmatio/toolbelt",
   "type": "module",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "dist/toolbelt.umd.cjs",
   "module": "dist/toolbelt.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/toolbelt.js",
-      "require": "./dist/toolbelt.umd.cjs"
+      "require": "./dist/toolbelt.cjs"
     }
   },
   "typings": "./dist/index.d.ts",
@@ -25,9 +25,9 @@
     "type-check": "DEBUG=0 vue-tsc --build --force"
   },
   "devDependencies": {
-    "@playwright/test": "1.48.2",
+    "@playwright/test": "1.49.0",
     "@tsconfig/node20": "20.1.4",
-    "@types/node": "22.9.0",
+    "@types/node": "22.9.1",
     "@vitejs/plugin-vue": "5.2.0",
     "@vitest/coverage-v8": "2.1.5",
     "@vue/test-utils": "2.4.6",
@@ -37,9 +37,21 @@
     "vite": "5.4.11",
     "vite-plugin-dts": "4.3.0",
     "vitest": "2.1.5",
-    "vue": "3.5.12",
+    "vue": "3.5.13",
     "vue-router": "4.4.5",
     "vue-tsc": "2.1.10"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    },
+    "vue-router": {
+      "optional": true
+    }
   },
   "files": [
     "dist",
