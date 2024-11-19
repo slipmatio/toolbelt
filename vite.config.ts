@@ -4,18 +4,27 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-  plugins: [vue(), dts({ tsconfigPath: './tsconfig.app.json', rollupTypes: true })],
+  plugins: [
+    vue(),
+    dts({ tsconfigPath: './tsconfig.app.json', include: ['src/**/*.ts', 'src/**/*.vue'], rollupTypes: true }),
+  ],
   build: {
     emptyOutDir: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'toolbelt',
-      fileName: 'toolbelt',
+      entry: {
+        toolbelt: resolve(__dirname, 'src/toolbelt.ts'),
+        'vue/index': resolve(__dirname, 'src/vue/index.ts'),
+      },
       formats: ['es', 'cjs'],
+      fileName: (format, entryName) => {
+        const extension = format === 'es' ? 'js' : 'cjs'
+        return `${entryName}.${extension}`
+      },
     },
     rollupOptions: {
       external: ['vue', 'vue-router'],
       output: {
+        preserveModules: false,
         globals: {
           vue: 'Vue',
           'vue-router': 'vueRouter',

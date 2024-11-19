@@ -1,6 +1,6 @@
 import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
 import { useRoute } from 'vue-router'
-import { isString } from './type-helpers'
+import { isString } from '../type-helpers'
 
 /**
  * Helper for figuring our ?next= query param in a safe way.

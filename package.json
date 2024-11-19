@@ -1,17 +1,21 @@
 {
   "name": "@slipmatio/toolbelt",
   "type": "module",
-  "version": "0.3.2",
-  "main": "dist/toolbelt.cjs",
+  "version": "0.3.9",
+  "main": "dist/toolbelt.js",
   "module": "dist/toolbelt.js",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/toolbelt.d.ts",
       "import": "./dist/toolbelt.js",
       "require": "./dist/toolbelt.cjs"
+    },
+    "./vue": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vue/index.js",
+      "require": "./dist/vue/index.cjs"
     }
   },
-  "typings": "./dist/index.d.ts",
   "repository": "https://github.com/slipmatio/toolbelt",
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
