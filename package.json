@@ -2,7 +2,7 @@
   "name": "@slipmatio/toolbelt",
   "type": "module",
   "version": "0.3.2",
-  "main": "dist/toolbelt.umd.cjs",
+  "main": "dist/toolbelt.cjs",
   "module": "dist/toolbelt.js",
   "exports": {
     ".": {
