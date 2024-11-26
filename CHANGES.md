@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 (2024-11-27)
+
+- Chore: typec-check in CI.
+
 ## 0.4.0 (2024-11-20)
 
 - Refactor: moved Vue tools into `@slipmatio/toolbelt/vue` package.

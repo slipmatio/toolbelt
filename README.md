@@ -38,6 +38,8 @@ Vue tools (`vue` and `vue-router` required): `import { tool } from @slipmatio/to
 
 ### Testing
 
+Type check: `pnpm ts`
+
 #### Unittests
 
 1. `pnpm test`
