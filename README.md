@@ -9,8 +9,10 @@ General utilities for Web development
 ### Browser
 
 - `browserIsIE()`
+- `browserIsSupported()`
 - `copyToClipboard(content: string)`
 - `getCookie(name: string)`
+- `hasTimeZoneSupport()`
 - `isValidSecureUrl(url: string)`
 - `prefetchImages(url: string|string[])`
 - `storageAvailable(type: 'localStorage' | 'sessionStorage')`

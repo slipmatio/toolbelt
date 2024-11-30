@@ -168,6 +168,9 @@ export function browserIsIE() {
   return ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1
 }
 
+/**
+ * Returns true if the browser has modern timezone support, localStorage is available and is not IE.
+ */
 export function browserIsSupported() {
   if (isSSR()) {
     return false
