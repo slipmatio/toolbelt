@@ -1,7 +1,7 @@
 {
   "name": "@slipmatio/toolbelt",
   "type": "module",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "main": "dist/toolbelt.js",
   "module": "dist/toolbelt.js",
   "exports": {

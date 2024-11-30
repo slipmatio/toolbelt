@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0 (2024-12-01)
+
+- Feat: added new tools: `isValidSecureUrl`, `prefetchImages`, `browserIsIE`, `browserIsSupported` and `isString` type helper.
+- Fix: added checks for running in SSR mode.
+
 ## 0.4.1 (2024-11-27)
 
 - Chore: typec-check in CI.

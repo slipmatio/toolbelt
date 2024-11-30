@@ -8,13 +8,17 @@ General utilities for Web development
 
 ### Browser
 
-- `copyToClipboard(content: string): boolean`
-- `getCookie(name: string): string | null`
-- `storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean`
+- `browserIsIE()`
+- `copyToClipboard(content: string)`
+- `getCookie(name: string)`
+- `isValidSecureUrl(url: string)`
+- `prefetchImages(url: string|string[])`
+- `storageAvailable(type: 'localStorage' | 'sessionStorage')`
 
 ### Vue
 
-- `getNextPath(router?: Router): string` - returns the value of `?next` query param or `/`
+- `getNextPath(router?: Router)` - returns the value of `?next` query param or `/`
+- `isString(value: string | LocationQueryValue[])`
 
 ## Installation
 

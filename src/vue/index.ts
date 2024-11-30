@@ -20,3 +20,5 @@ export function getNextPath(router?: Router): string {
   }
   return next
 }
+
+export { isString }
