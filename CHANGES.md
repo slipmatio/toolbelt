@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1 (2024-12-14)
+
+- Chore: bumped deps.
+
 ## 0.5.0 (2024-12-01)
 
 - Feat: added new tools: `isValidSecureUrl`, `prefetchImages`, `browserIsIE`, `browserIsSupported` and `isString` type helper.
