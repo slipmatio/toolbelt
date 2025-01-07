@@ -1,34 +1,44 @@
 {
-  "extends": [
-    "config:recommended",
-    "group:all",
-    "schedule:weekly",
-    ":widenPeerDependencies"
-  ],
-  "enabledManagers": [
-    "pep621",
-    "npm",
-    "github-actions"
-  ],
+  "extends": ["config:recommended"],
+  "enabledManagers": ["npm", "github-actions", "pep621"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
   "packageRules": [
     {
-      "matchManagers": [
-        "npm"
-      ],
-      "automerge": true,
-      "minimumReleaseAge": "2 days"
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["patch"],
+      "enabled": false
     },
     {
-      "rangeStrategy": "auto",
-      "matchPackageNames": [
-        "/npm/"
-      ]
+      "matchManagers": ["npm"],
+      "groupName": "npm-dependencies",
+      "groupSlug": "frontend",
+      "minimumReleaseAge": "3 days",
+      "automerge": true,
+      "automergeSchedule": ["after 4am and before 8am on Monday and Thursday"]
     },
     {
+      "matchManagers": ["github-actions"],
+      "groupName": "tooling-dependencies",
+      "groupSlug": "tooling",
       "automerge": true,
-      "matchPackageNames": [
-        "/github-actions/"
-      ]
+      "minimumReleaseAge": "3 days",
+      "automergeSchedule": ["after 4am and before 8am on Monday and Thursday"]
+    },
+    {
+      "matchManagers": ["pep621"],
+      "groupName": "backend-dependencies",
+      "groupSlug": "backend",
+      "automerge": true,
+      "minimumReleaseAge": "3 days",
+      "rangeStrategy": "bump",
+      "automergeSchedule": ["after 4am and before 8am on Monday and Thursday"]
+    },
+    {
+      "matchPackageNames": ["vitest"],
+      "allowedVersions": "<2.1.7"
     }
   ],
   "timezone": "Europe/Helsinki",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 (2025-01-07)
+
+- Docs: added better TSDocs to `getNextPath`.
+- CI: added unittests to CI.
+- Chore: bumped deps.
+
 ## 0.5.1 (2024-12-14)
 
 - Chore: bumped deps.

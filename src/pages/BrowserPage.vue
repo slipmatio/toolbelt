@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { copyToClipboard, getCookie, storageAvailable } from '@/browser'
 import { ref } from 'vue'
-import { copyToClipboard, getCookie, storageAvailable } from '../browser'
 
 // Cookies
 try {

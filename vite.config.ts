@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+import { fileURLToPath, URL } from 'node:url'
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
@@ -8,6 +9,11 @@ export default defineConfig({
     vue(),
     dts({ tsconfigPath: './tsconfig.app.json', include: ['src/**/*.ts', 'src/**/*.vue'], rollupTypes: true }),
   ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
   build: {
     emptyOutDir: true,
     lib: {

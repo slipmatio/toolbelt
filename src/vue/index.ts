@@ -1,10 +1,12 @@
+import { isString } from '@/type-helpers'
 import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
 import { useRoute } from 'vue-router'
-import { isString } from '../type-helpers'
 
 /**
- * Helper for figuring our ?next= query param in a safe way.
- * Pass the router instance whenever not used directly from script setup block.
+ * Safely extracts and validates the 'next' query parameter from the current route.
+ *
+ * @param router - Optional Vue Router instance. Required when used outside of component setup.
+ * @returns A validated path string (starting with '/') or '/' if no valid next path exists.
  */
 export function getNextPath(router?: Router): string {
   let route: RouteLocationNormalizedLoaded

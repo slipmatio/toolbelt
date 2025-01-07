@@ -5,18 +5,18 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/tests.yml'
-      - 'pnpm-lock.yaml'
-      - 'src/**/*.ts'
-      - 'src/**/*.vue'
-      - 'tests/e2e/**/*.spec.ts'
+      - ".github/workflows/tests.yml"
+      - "pnpm-lock.yaml"
+      - "src/**/*.ts"
+      - "src/**/*.vue"
+      - "tests/e2e/**/*.spec.ts"
   pull_request:
     paths:
-      - '.github/workflows/tests.yml'
-      - 'pnpm-lock.yaml'
-      - 'src/**/*.ts'
-      - 'src/**/*.vue'
-      - 'tests/e2e/**/*.spec.ts'
+      - ".github/workflows/tests.yml"
+      - "pnpm-lock.yaml"
+      - "src/**/*.ts"
+      - "src/**/*.vue"
+      - "tests/e2e/**/*.spec.ts"
   workflow_dispatch:
 
 concurrency:
@@ -47,18 +47,21 @@ jobs:
       - uses: actions/setup-node@v4.1.0
         with:
           node-version: 22
-          cache: 'pnpm'
-
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps
+          cache: "pnpm"
 
       - name: Type Check
         run: pnpm ts
 
+      - name: Vitest
+        run: pnpm test
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+
       - name: Run e2e tests
         run: pnpm test:ci-e2e
 
-      - uses: actions/upload-artifact@v4.4.3
+      - uses: actions/upload-artifact@v4.5.0
         if: always()
         with:
           name: playwright-report
