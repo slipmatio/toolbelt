@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.2 (2025-01-13)
+
+- Fix: export `browserIsSupported`.
+
 ## 0.7.1 (2025-01-13)
 
 - Fix: export `browserIsSupported`.
