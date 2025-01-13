@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1 (2025-01-13)
+
+- Fix: export `browserIsSupported`.
+
 ## 0.7.0 (2025-01-13)
 
 - Refactor: refactored `storageAvailable` to return actual storage state.
