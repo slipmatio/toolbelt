@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0 (2025-01-13)
+
+- Refactor: refactored `storageAvailable` to return actual storage state.
+- Chore: bumped deps.
+
 ## 0.6.0 (2025-01-07)
 
 - Docs: added better TSDocs to `getNextPath`.
