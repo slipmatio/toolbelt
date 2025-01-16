@@ -97,14 +97,22 @@ export function copyToClipboard(content: string) {
 }
 
 /**
+ * Checks if the domain of the given URL is in the list of allowed domains.
+ */
+export function isAllowedDomain(url: string, allowedDomains: string[]): boolean {
+  try {
+    const hostname = new URL(url).hostname
+    return allowedDomains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))
+  } catch {
+    return false
+  }
+}
+
+/**
  * Basic URL validation that checks if string can be parsed as URL
  * Input must start with https://
  */
 export function isValidSecureUrl(url: string) {
-  if (!url?.trim()) {
-    return false
-  }
-
   try {
     const parsed = new URL(url)
     return parsed.protocol === 'https:'

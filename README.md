@@ -19,6 +19,7 @@ General utilities for Web development
 
 ### Vue
 
+- `getNext(allowedDomains: string[], router?: Router)` - returns the value of `?next` query param or `/`
 - `getNextPath(router?: Router)` - returns the value of `?next` query param or `/`
 - `isString(value: string | LocationQueryValue[])`
 

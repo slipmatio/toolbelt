@@ -35,10 +35,6 @@
       "minimumReleaseAge": "3 days",
       "rangeStrategy": "bump",
       "automergeSchedule": ["after 4am and before 8am on Monday and Thursday"]
-    },
-    {
-      "matchPackageNames": ["vitest"],
-      "allowedVersions": "<2.1.7"
     }
   ],
   "timezone": "Europe/Helsinki",

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.0 (2025-01-17)
+
+- Feat: Added `getNext` to Vue utils.
+- Chore: bumped deps.
+
 ## 0.7.2 (2025-01-13)
 
 - Fix: export `browserIsSupported`.
