@@ -2,7 +2,7 @@ import { expect, test } from 'vitest'
 
 import { isString } from '@/type-helpers'
 
-test('entries', async () => {
+test('entries', () => {
   expect(isString('')).toBe(true)
   expect(isString('foo')).toBe(true)
   expect(isString([null])).toBe(false)

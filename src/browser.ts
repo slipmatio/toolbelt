@@ -120,17 +120,20 @@ export function isAllowedDomain(url: string, allowedDomains: string[]): boolean 
 
 /**
  * Basic URL validation that checks if string can be parsed as URL
- * Input must start with https://
  */
 export function isValidSecureUrl(url: string) {
   try {
     const parsed = new URL(url)
+
+    if (parsed.hostname === 'localhost') {
+      return true
+    }
+
     return parsed.protocol === 'https:'
   } catch {
     return false
   }
 }
-
 /**
  * Simple helper to prefetch images
  * @param urls URL or array of URLs to prefetch
