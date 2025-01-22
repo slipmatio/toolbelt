@@ -60,7 +60,7 @@ export function getCookie(name: string) {
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim()
       // Does this cookie string begin with the name we want?
-      if (cookie.substring(0, name.length + 1) === name + '=') {
+      if (cookie.substring(0, name.length + 1) === `${name}=`) {
         cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
         break
       }
@@ -69,9 +69,8 @@ export function getCookie(name: string) {
   // Infering the output type doesn't work properly w/o this 🤷‍♂️
   if (cookieValue.length > 0) {
     return cookieValue
-  } else {
-    return null
   }
+  return null
 }
 
 /**
@@ -101,8 +100,19 @@ export function copyToClipboard(content: string) {
  */
 export function isAllowedDomain(url: string, allowedDomains: string[]): boolean {
   try {
-    const hostname = new URL(url).hostname
-    return allowedDomains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))
+    const parsedUrl = new URL(url)
+    const hostWithPort = parsedUrl.port ? `${parsedUrl.hostname}:${parsedUrl.port}` : parsedUrl.hostname
+
+    return allowedDomains.some(allowedDomain => {
+      const [allowedHost, allowedPort] = allowedDomain.split(':')
+      const [urlHost, _] = hostWithPort.split(':')
+
+      if (allowedPort) {
+        return hostWithPort === allowedDomain
+      }
+
+      return urlHost === allowedHost || urlHost.endsWith(`.${allowedHost}`)
+    })
   } catch {
     return false
   }
@@ -134,8 +144,8 @@ export async function prefetchImages(urls: string | string[]) {
 
   return Promise.all(
     urlList.map(
-      (url) =>
-        new Promise<{ url: string; success: boolean }>((resolve) => {
+      url =>
+        new Promise<{ url: string; success: boolean }>(resolve => {
           const img = new Image()
 
           function cleanup() {
