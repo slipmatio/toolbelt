@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.2 (2025-01-22)
+
+- Fix: consider localhost as secure in `isValidSecureUrl`.
+
 ## 0.8.1 (2025-01-22)
 
 - Fix: `getNext` now supports port numbers as well.
