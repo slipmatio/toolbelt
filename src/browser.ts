@@ -100,8 +100,19 @@ export function copyToClipboard(content: string) {
  */
 export function isAllowedDomain(url: string, allowedDomains: string[]): boolean {
   try {
-    const hostname = new URL(url).hostname
-    return allowedDomains.some(domain => hostname === domain || hostname.endsWith(`.${domain}`))
+    const parsedUrl = new URL(url)
+    const hostWithPort = parsedUrl.port ? `${parsedUrl.hostname}:${parsedUrl.port}` : parsedUrl.hostname
+
+    return allowedDomains.some(allowedDomain => {
+      const [allowedHost, allowedPort] = allowedDomain.split(':')
+      const [urlHost, _] = hostWithPort.split(':')
+
+      if (allowedPort) {
+        return hostWithPort === allowedDomain
+      }
+
+      return urlHost === allowedHost || urlHost.endsWith(`.${allowedHost}`)
+    })
   } catch {
     return false
   }
