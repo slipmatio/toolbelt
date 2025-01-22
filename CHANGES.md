@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.1 (2025-01-22)
+
+- Fix: `getNext` now supports port numbers as well.
+- Chore: bumped deps.
+
 ## 0.8.0 (2025-01-17)
 
 - Feat: Added `getNext` to Vue utils.
