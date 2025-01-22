@@ -50,7 +50,6 @@
         "noNonNullAssertion": "off"
       },
       "suspicious": {
-        "noConsole": "error",
         "noEmptyBlockStatements": "error",
         "noExplicitAny": "error",
         "noExtraNonNullAssertion": "error",
