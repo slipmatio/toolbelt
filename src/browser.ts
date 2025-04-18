@@ -229,10 +229,12 @@ export function browserIsSupported() {
 /**
  * Returns true if the browser is a bot or a headless browser.
  * Note: This is a *VERY* basic check and should not be used for security purposes.
- */
-export function isBot() {
+ *
+ * @param ssrReturn If true, the function will return true when called in SSR mode.
+ *  */
+export function isBot(ssrReturn = true) {
   if (isSSR()) {
-    return true
+    return ssrReturn
   }
   try {
     const userAgent = navigator.userAgent.toLowerCase()
@@ -260,9 +262,15 @@ export function isBot() {
       'axios',
       'curl',
       'wget',
+      'claudebot',
+      'google.com/bot',
+      'gptbot',
+      'searchbot',
+      '/bot',
+      'wordpress',
+      'tiktokspider',
     ]
     const isCommonBot = commonBots.some(pattern => userAgent.includes(pattern))
-    const hasNormalBrowserFeatures = 'ontouchstart' in window || navigator.maxTouchPoints > 0
     const hasHeadlessFeatures =
       userAgent.includes('headless') ||
       navigator.webdriver ||
@@ -276,7 +284,7 @@ export function isBot() {
       window.domAutomation ||
       // @ts-expect-error
       window._Selenium_IDE_Recorder
-    return !hasNormalBrowserFeatures || hasHeadlessFeatures || isCommonBot
+    return hasHeadlessFeatures || isCommonBot
   } catch {
     return true
   }

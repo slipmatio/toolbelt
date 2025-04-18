@@ -14,7 +14,7 @@ General utilities for Web development
 - `deleteCookie(name: string, path = '/', domain: string | undefined = undefined, secure = false, sameSite: 'Lax' | 'Strict' | 'None' | undefined = undefined)`
 - `getCookie(name: string)`
 - `hasTimeZoneSupport()`
-- `isBot()`
+- `isBot(ssrReturn: boolean)`
 - `isValidSecureUrl(url: string)`
 - `prefetchImages(url: string|string[])`
 - `storageAvailable(type: 'localStorage' | 'sessionStorage')`
