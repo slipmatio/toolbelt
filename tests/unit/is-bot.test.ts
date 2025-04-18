@@ -1,4 +1,4 @@
-import { Window } from 'happy-dom' // or jsdom
+import { Window } from 'happy-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { isBot } from '@/browser'
@@ -25,7 +25,6 @@ const browserUAas = [
 
 describe('Tests with global window mock', () => {
   beforeEach(() => {
-    // Create a more complete window mock
     const window = new Window()
     vi.stubGlobal('window', window)
     vi.stubGlobal('document', window.document)
