@@ -33,7 +33,7 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage') {
       localStorage.setItem(testKey, testKey)
       localStorage.removeItem(testKey)
       return true
-    } catch (_e) {
+    } catch {
       return false
     }
   } else {
@@ -41,7 +41,7 @@ export function storageAvailable(type: 'localStorage' | 'sessionStorage') {
       sessionStorage.setItem(testKey, testKey)
       sessionStorage.removeItem(testKey)
       return true
-    } catch (_e) {
+    } catch {
       return false
     }
   }
