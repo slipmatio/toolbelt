@@ -74,6 +74,42 @@ export function getCookie(name: string) {
 }
 
 /**
+ * Deletes a browser cookie by setting its expiration date to the past.
+ *
+ * @param name The exact name of the cookie.
+ * @param path The exact path the cookie was set with.
+ * @param domain The exact domain the cookie was set with (use undefined if no domain was explicitly set).
+ * @param secure Whether the cookie was set with the Secure flag.
+ * @param sameSite The exact SameSite attribute value ('Lax', 'Strict', 'None') the cookie was set with, or undefined if it was not set.
+ */
+export function deleteCookie(
+  name: string,
+  path = '/',
+  domain: string | undefined = undefined,
+  secure = false,
+  sameSite: 'Lax' | 'Strict' | 'None' | undefined = undefined
+) {
+  try {
+    const encodedName = encodeURIComponent(name)
+    let cookieString = `${encodedName}=; expires=Thu, 17 Dec 1979 17:18:19 GMT; path=${path}`
+
+    if (domain) {
+      cookieString += `; domain=${domain}`
+    }
+    if (secure) {
+      cookieString += '; Secure'
+    }
+    if (sameSite) {
+      cookieString += `; SameSite=${sameSite}`
+    }
+
+    document.cookie = cookieString
+  } catch {
+    return
+  }
+}
+
+/**
  * Simple clipboard copy for modern browsers. Returns true if successful.
  */
 export function copyToClipboard(content: string) {
@@ -188,4 +224,60 @@ export function browserIsSupported() {
     return false
   }
   return !browserIsIE() && hasTimeZoneSupport() && storageAvailable('localStorage')
+}
+
+/**
+ * Returns true if the browser is a bot or a headless browser.
+ * Note: This is a *VERY* basic check and should not be used for security purposes.
+ */
+export function isBot() {
+  if (isSSR()) {
+    return true
+  }
+  try {
+    const userAgent = navigator.userAgent.toLowerCase()
+    const commonBots = [
+      'googlebot',
+      'bingbot',
+      'yandexbot',
+      'duckduckbot',
+      'slurp',
+      'baiduspider',
+      'facebookexternalhit',
+      'twitterbot',
+      'rogerbot',
+      'linkedinbot',
+      'embedly',
+      'quora link preview',
+      'showyoubot',
+      'outbrain',
+      'pinterest',
+      'slackbot',
+      'vkshare',
+      'w3c_validator',
+      'crawler',
+      'spider',
+      'axios',
+      'curl',
+      'wget',
+    ]
+    const isCommonBot = commonBots.some(pattern => userAgent.includes(pattern))
+    const hasNormalBrowserFeatures = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+    const hasHeadlessFeatures =
+      userAgent.includes('headless') ||
+      navigator.webdriver ||
+      // @ts-expect-error
+      window.callPhantom ||
+      // @ts-expect-error
+      window._phantom ||
+      // @ts-expect-error
+      window.__selenium__ ||
+      // @ts-expect-error
+      window.domAutomation ||
+      // @ts-expect-error
+      window._Selenium_IDE_Recorder
+    return !hasNormalBrowserFeatures || hasHeadlessFeatures || isCommonBot
+  } catch {
+    return true
+  }
 }

@@ -1,6 +1,6 @@
 # Slipmat Toolbelt
 
-**Note: this project is under active development, DO NOT USE IN PRODUCTION**
+**Note: this project is under active development**, you should pin the strict version to avoid breakages.
 
 General utilities for Web development
 
@@ -11,8 +11,10 @@ General utilities for Web development
 - `browserIsIE()`
 - `browserIsSupported()`
 - `copyToClipboard(content: string)`
+- `deleteCookie(name: string, path = '/', domain: string | undefined = undefined, secure = false, sameSite: 'Lax' | 'Strict' | 'None' | undefined = undefined)`
 - `getCookie(name: string)`
 - `hasTimeZoneSupport()`
+- `isBot()`
 - `isValidSecureUrl(url: string)`
 - `prefetchImages(url: string|string[])`
 - `storageAvailable(type: 'localStorage' | 'sessionStorage')`

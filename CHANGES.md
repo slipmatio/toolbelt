@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0 (2025-04-18)
+
+- Feat: added `deleteCookie`.
+- Feat: added `isBot`.
+
 ## 0.8.2 (2025-01-22)
 
 - Fix: consider localhost as secure in `isValidSecureUrl`.

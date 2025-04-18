@@ -1,2 +1,2 @@
-export { browserIsSupported, copyToClipboard, getCookie, storageAvailable } from './browser'
+export { browserIsSupported, copyToClipboard, deleteCookie, getCookie, isBot, storageAvailable } from './browser'
 export { getNextPath } from './routes'
