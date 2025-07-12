@@ -1,7 +1,7 @@
+import { isString } from '@/type-helpers'
+import { isAllowedDomain, isValidSecureUrl } from '@/utils'
 import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
 import { useRoute } from 'vue-router'
-import { isAllowedDomain, isValidSecureUrl } from '@/browser'
-import { isString } from '@/type-helpers'
 
 /**
  * Safely extracts and validates the 'next' query parameter from the current route. Allows only local paths.
@@ -55,5 +55,3 @@ export function getNext(allowedDomains: string[], router?: Router): string {
   }
   return next
 }
-
-export { isString }

@@ -1,2 +1,11 @@
-export { browserIsSupported, copyToClipboard, deleteCookie, getCookie, isBot, storageAvailable } from './browser'
-export { CappedCollection } from './utils'
+export {
+  browserIsIE,
+  browserIsSupported,
+  copyToClipboard,
+  deleteCookie,
+  getCookie,
+  hasTimeZoneSupport,
+  isBot,
+  storageAvailable,
+} from './browser'
+export { CappedCollection, isAllowedDomain, isValidSecureUrl, prefetchImages } from './utils'

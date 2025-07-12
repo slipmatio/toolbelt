@@ -1,3 +1,5 @@
+import { isSSR } from './common'
+
 /**
  * A fixed-capacity collection that maintains only the most recent items.
  * Older items are automatically removed when capacity is reached.
@@ -110,4 +112,96 @@ export class CappedCollection<T> {
   get isFull(): boolean {
     return this.count === this.capacity
   }
+}
+
+/**
+ * Checks if the domain of the given URL is in the list of allowed domains.
+ */
+export function isAllowedDomain(url: string, allowedDomains: string[]): boolean {
+  try {
+    const parsedUrl = new URL(url)
+    const hostWithPort = parsedUrl.port ? `${parsedUrl.hostname}:${parsedUrl.port}` : parsedUrl.hostname
+
+    return allowedDomains.some((allowedDomain) => {
+      const [allowedHost, allowedPort] = allowedDomain.split(':')
+      const [urlHost, _] = hostWithPort.split(':')
+
+      if (allowedPort) {
+        return hostWithPort === allowedDomain
+      }
+
+      return urlHost === allowedHost || urlHost.endsWith(`.${allowedHost}`)
+    })
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Basic URL validation that checks if string can be parsed as URL
+ */
+export function isValidSecureUrl(url: string) {
+  try {
+    const parsed = new URL(url)
+
+    if (parsed.hostname === 'localhost') {
+      return true
+    }
+
+    return parsed.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+/**
+ * Simple helper to prefetch images
+ * @param urls URL or array of URLs to prefetch
+ */
+export async function prefetchImages(urls: string | string[]) {
+  if (isSSR()) {
+    return []
+  }
+
+  const urlList = Array.isArray(urls) ? urls : [urls]
+
+  return await Promise.all(
+    urlList.map(
+      (url) =>
+        new Promise<{ url: string; success: boolean }>((resolve) => {
+          const img = new Image()
+
+          function cleanup() {
+            img.onload = null
+            img.onerror = null
+          }
+
+          img.onload = () => {
+            cleanup()
+            resolve({ url, success: true })
+          }
+
+          img.onerror = () => {
+            cleanup()
+            resolve({ url, success: false })
+          }
+
+          img.src = url
+        })
+    )
+  )
+}
+
+/**
+ * Reads a GET parameter from the current URL's query string.
+ *
+ * @param name The name of the parameter to retrieve.
+ * @returns The parameter's value as a string, or null if it doesn't exist.
+ */
+export function getParam(name: string) {
+  if (isSSR()) {
+    return null
+  }
+
+  const searchParams = new URLSearchParams(window.location.search)
+  return searchParams.get(name)
 }

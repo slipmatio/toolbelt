@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { isValidSecureUrl } from '@/browser'
+import { isValidSecureUrl } from '@/utils'
 
 test('isValidSecureUrl', () => {
   expect(isValidSecureUrl('https://www.fi')).toBe(true)
