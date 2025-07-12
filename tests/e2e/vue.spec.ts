@@ -1,5 +1,5 @@
-import { testPaths, testUrls } from '@/testurls'
 import { expect, test } from '@playwright/test'
+import { testPaths, testUrls } from '@/testurls'
 
 test('getNextPath should work on all inputs', async ({ page }) => {
   for (const { url, expected } of testPaths) {

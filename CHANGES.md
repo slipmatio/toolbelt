@@ -4,6 +4,10 @@
 
 - Refactor: better `isBot` and better tests.
 
+## 0.9.1 (2025-04-18)
+
+- Refactor: better `isBot` and better tests.
+
 ## 0.9.0 (2025-04-18)
 
 - Feat: added `deleteCookie`.

@@ -1,62 +1,80 @@
 # Slipmat Toolbelt
 
-**Note: this project is under active development**, you should pin the strict version to avoid breakages.
-
-General utilities for Web development
-
-## Features
-
-### Browser
-
-- `browserIsIE()`
-- `browserIsSupported()`
-- `copyToClipboard(content: string)`
-- `deleteCookie(name: string, path = '/', domain: string | undefined = undefined, secure = false, sameSite: 'Lax' | 'Strict' | 'None' | undefined = undefined)`
-- `getCookie(name: string)`
-- `hasTimeZoneSupport()`
-- `isBot(ssrReturn: boolean)`
-- `isValidSecureUrl(url: string)`
-- `prefetchImages(url: string|string[])`
-- `storageAvailable(type: 'localStorage' | 'sessionStorage')`
-
-### Vue
-
-- `getNext(allowedDomains: string[], router?: Router)` - returns the value of `?next` query param or `/`
-- `getNextPath(router?: Router)` - returns the value of `?next` query param or `/`
-- `isString(value: string | LocationQueryValue[])`
+TypeScript utility library for Web development. These small utilities
 
 ## Installation
 
-`pnpm add @slipmatio/toolbelt`
+```bash
+pnpm add @slipmatio/toolbelt
+```
 
 ## Usage
 
-Browser tools: `import { tool } from @slipmatio/toolbelt`
+### Browser Utilities
 
-Vue tools (`vue` and `vue-router` required): `import { tool } from @slipmatio/toolbelt/vue`
+```typescript
+import { browserIsSupported, getCookie } from '@slipmatio/toolbelt'
+```
+
+- `browserIsIE()` - Check if browser is Internet Explorer
+- `browserIsSupported()` - Check if browser has modern features (timezone support, localStorage, and is not IE)
+- `copyToClipboard(content: string)` - Copy text to clipboard
+- `deleteCookie(name, path?, domain?, secure?, sameSite?)` - Delete a cookie
+- `getCookie(name: string)` - Get cookie value by name
+- `hasTimeZoneSupport()` - Check if browser supports [computed timezone](https://caniuse.com/mdn-javascript_builtins_intl_datetimeformat_resolvedoptions_computed_timezone)
+- `isBot(ssrReturn?: boolean)` - Detect if user agent is a bot
+- `storageAvailable(type: 'localStorage' | 'sessionStorage')` - Check if storage is available
+
+### General Utilities
+
+```typescript
+import { CappedCollection } from '@slipmatio/toolbelt'
+```
+
+- `CappedCollection<T>` - Fixed-capacity collection that maintains only the most recent items
+- `isAllowedDomain(url: string, allowedDomains: string[])` - Check if URL domain is in allowed list
+- `isValidSecureUrl(url: string)` - Validate HTTPS URL (allows localhost)
+- `prefetchImages(urls: string | string[])` - Preload images
+
+#### CappedCollection
+
+```typescript
+import { CappedCollection } from '@slipmatio/toolbelt'
+
+// Create a collection that holds max 1000 items
+const collection = new CappedCollection<string>(1000)
+
+// Add items
+collection.add('item1')
+collection.addMany(['item2', 'item3'])
+
+// Get all items
+const items = collection.get() // ['item1', 'item2', 'item3']
+
+// Check status
+console.log(collection.size) // 3
+console.log(collection.isFull) // false
+
+// Clear all items
+collection.clear()
+```
+
+### Vue Utilities
+
+```typescript
+import { getNext, getNextPath } from '@slipmatio/toolbelt/vue'
+```
+
+- `getNext(allowedDomains: string[], router?: Router)` - Get validated 'next' query param (allows URLs to specified domains)
+- `getNextPath(router?: Router)` - Get validated 'next' query param (local paths only)
 
 ## Development
 
-### Install dependencies
-
-`pnpm i`
-
-### Run development server
-
-`pnpm dev`
-
-### Testing
-
-Type check: `pnpm ts`
-
-#### Unittests
-
-1. `pnpm test`
-
-#### E2E
-
-1. Run the backend: `uv run uvicorn api:app --reload`
-2. `pnpm test:e2e`
+```bash
+pnpm dev      # Development server
+pnpm build    # Build library
+pnpm test     # Run tests
+```
 
 ### Publishing
 

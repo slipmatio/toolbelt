@@ -1,18 +1,19 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      "**/*.vue",
-      "**/*.d.ts",
-      "**/dist",
-      "**/dist-ssr",
-      "**/coverage",
-      "**/test-results",
-      "**/node_modules",
-      "pnpm-lock.yaml",
-      "pnpm-workspace.yaml"
+    "includes": [
+      "**",
+      "!**/*.vue",
+      "!**/*.d.ts",
+      "!**/dist",
+      "!**/dist-ssr",
+      "!**/coverage",
+      "!**/test-results",
+      "!**/node_modules",
+      "!**/pnpm-lock.yaml",
+      "!**/pnpm-workspace.yaml"
     ]
   },
   "formatter": {
@@ -26,7 +27,7 @@
     "attributePosition": "auto",
     "bracketSpacing": true
   },
-  "organizeImports": { "enabled": true },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
@@ -36,18 +37,17 @@
         "noUselessTypeConstraint": "error"
       },
       "correctness": {
-        "noUnusedVariables": "error",
-        "useArrayLiterals": "off"
+        "noUnusedVariables": "error"
       },
       "style": {
         "noInferrableTypes": "error",
         "noNamespace": "error",
-        "noVar": "error",
         "useAsConstAssertion": "error",
         "useConsistentArrayType": "error",
         "useShorthandFunctionType": "error",
         "useThrowOnlyError": "error",
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useArrayLiterals": "off"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",
@@ -56,7 +56,8 @@
         "noMisleadingInstantiator": "error",
         "noUnsafeDeclarationMerging": "error",
         "useAwait": "error",
-        "useNamespaceKeyword": "error"
+        "useNamespaceKeyword": "error",
+        "noVar": "error"
       }
     }
   },
@@ -80,16 +81,15 @@
   },
   "overrides": [
     {
-      "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       "linter": {
         "rules": {
-          "complexity": { "useLiteralKeys": "off", "useOptionalChain": "off" },
+          "complexity": { "useLiteralKeys": "off", "useOptionalChain": "off", "noArguments": "error" },
           "correctness": {
             "noConstAssign": "off",
             "noGlobalObjectCalls": "off",
             "noInvalidBuiltinInstantiation": "off",
             "noInvalidConstructorSuper": "off",
-            "noNewSymbol": "off",
             "noSetterReturn": "off",
             "noUndeclaredVariables": "off",
             "noUnreachable": "off",
@@ -103,8 +103,6 @@
               "options": { "strictCase": false }
             },
             "useThrowOnlyError": "off",
-            "noArguments": "error",
-            "noVar": "error",
             "useConst": "error"
           },
           "suspicious": {
@@ -116,13 +114,14 @@
             "noImportAssign": "off",
             "noRedeclare": "off",
             "noUnsafeNegation": "off",
-            "useGetterReturn": "off"
+            "useGetterReturn": "off",
+            "noVar": "error"
           }
         }
       }
     },
     {
-      "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       "linter": {
         "rules": {
           "correctness": {
@@ -130,15 +129,12 @@
             "noGlobalObjectCalls": "off",
             "noInvalidBuiltinInstantiation": "off",
             "noInvalidConstructorSuper": "off",
-            "noNewSymbol": "off",
             "noSetterReturn": "off",
             "noUndeclaredVariables": "off",
             "noUnreachable": "off",
             "noUnreachableSuper": "off"
           },
           "style": {
-            "noArguments": "error",
-            "noVar": "error",
             "useConst": "error"
           },
           "suspicious": {
@@ -150,13 +146,17 @@
             "noImportAssign": "off",
             "noRedeclare": "off",
             "noUnsafeNegation": "off",
-            "useGetterReturn": "off"
+            "useGetterReturn": "off",
+            "noVar": "error"
+          },
+          "complexity": {
+            "noArguments": "error"
           }
         }
       }
     },
     {
-      "include": ["**/*.js", "**/*.jsx", "**/*.cjs", "**/*.mjs"],
+      "includes": ["**/*.js", "**/*.jsx", "**/*.cjs", "**/*.mjs"],
       "javascript": { "globals": [] },
       "linter": {
         "rules": {

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { isAllowedDomain } from '@/browser'
+import { isAllowedDomain } from '@/utils'
 
 test('isAllowedDomain', () => {
   const allowed = ['www.example.com', 'slipmat.io', 'localhost:8000']
