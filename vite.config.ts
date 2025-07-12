@@ -1,6 +1,6 @@
-import vue from '@vitejs/plugin-vue'
+import { resolve } from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
-import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 
