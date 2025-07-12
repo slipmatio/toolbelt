@@ -1,3 +1,7 @@
+/**
+ * A fixed-capacity collection that maintains only the most recent items.
+ * Older items are automatically removed when capacity is reached.
+ */
 export class CappedCollection<T> {
   private chunks: T[][] = []
   private readonly capacity: number
@@ -6,6 +10,10 @@ export class CappedCollection<T> {
   private headChunkIndex = 0
   private headItemIndex = 0
 
+  /**
+   * @param capacity - Maximum number of items to retain
+   * @param chunkSize - Internal chunk size for memory efficiency (default: 256)
+   */
   constructor(capacity: number, chunkSize = 256) {
     if (capacity < 1) throw new Error('Capacity must be positive')
     if (chunkSize < 1) throw new Error('Chunk size must be positive')
@@ -13,6 +21,9 @@ export class CappedCollection<T> {
     this.chunkSize = chunkSize
   }
 
+  /**
+   * Adds an item to the collection.
+   */
   add(item: T): void {
     if (this.chunks.length === 0) {
       this.chunks.push([])
@@ -44,12 +55,18 @@ export class CappedCollection<T> {
     }
   }
 
+  /**
+   * Adds multiple items to the collection.
+   */
   addMany(items: T[]): void {
     for (const item of items) {
       this.add(item)
     }
   }
 
+  /**
+   * Returns all items in the collection.
+   */
   get(): T[] {
     if (this.chunks.length === 0) return []
 
@@ -70,6 +87,9 @@ export class CappedCollection<T> {
     return result
   }
 
+  /**
+   * Removes all items from the collection.
+   */
   clear(): void {
     this.chunks = []
     this.count = 0
@@ -77,10 +97,16 @@ export class CappedCollection<T> {
     this.headItemIndex = 0
   }
 
+  /**
+   * The current number of items in the collection.
+   */
   get size(): number {
     return this.count
   }
 
+  /**
+   * Whether the collection has reached its capacity.
+   */
   get isFull(): boolean {
     return this.count === this.capacity
   }
