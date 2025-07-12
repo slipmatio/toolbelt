@@ -139,7 +139,7 @@ export function isAllowedDomain(url: string, allowedDomains: string[]): boolean 
     const parsedUrl = new URL(url)
     const hostWithPort = parsedUrl.port ? `${parsedUrl.hostname}:${parsedUrl.port}` : parsedUrl.hostname
 
-    return allowedDomains.some(allowedDomain => {
+    return allowedDomains.some((allowedDomain) => {
       const [allowedHost, allowedPort] = allowedDomain.split(':')
       const [urlHost, _] = hostWithPort.split(':')
 
@@ -183,8 +183,8 @@ export async function prefetchImages(urls: string | string[]) {
 
   return await Promise.all(
     urlList.map(
-      url =>
-        new Promise<{ url: string; success: boolean }>(resolve => {
+      (url) =>
+        new Promise<{ url: string; success: boolean }>((resolve) => {
           const img = new Image()
 
           function cleanup() {
@@ -231,7 +231,7 @@ export function browserIsSupported() {
  * Note: This is a *VERY* basic check and should not be used for security purposes.
  *
  * @param ssrReturn If true, the function will return true when called in SSR mode.
- *  */
+ */
 export function isBot(ssrReturn = true) {
   if (isSSR()) {
     return ssrReturn
@@ -270,7 +270,7 @@ export function isBot(ssrReturn = true) {
       'wordpress',
       'tiktokspider',
     ]
-    const isCommonBot = commonBots.some(pattern => userAgent.includes(pattern))
+    const isCommonBot = commonBots.some((pattern) => userAgent.includes(pattern))
     const hasHeadlessFeatures =
       userAgent.includes('headless') ||
       navigator.webdriver ||

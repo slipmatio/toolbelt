@@ -21,10 +21,9 @@ export default defineConfig({
         toolbelt: resolve(__dirname, 'src/toolbelt.ts'),
         'vue/index': resolve(__dirname, 'src/vue/index.ts'),
       },
-      formats: ['es', 'cjs'],
-      fileName: (format, entryName) => {
-        const extension = format === 'es' ? 'js' : 'cjs'
-        return `${entryName}.${extension}`
+      formats: ['es'],
+      fileName: (_format, entryName) => {
+        return `${entryName}.js`
       },
     },
     rollupOptions: {

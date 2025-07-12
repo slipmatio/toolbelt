@@ -2,18 +2,14 @@
   "name": "@slipmatio/toolbelt",
   "type": "module",
   "version": "0.9.1",
-  "main": "dist/toolbelt.js",
-  "module": "dist/toolbelt.js",
   "exports": {
     ".": {
       "types": "./dist/toolbelt.d.ts",
-      "import": "./dist/toolbelt.js",
-      "require": "./dist/toolbelt.cjs"
+      "import": "./dist/toolbelt.js"
     },
     "./vue": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/vue/index.js",
-      "require": "./dist/vue/index.cjs"
+      "import": "./dist/vue/index.js"
     }
   },
   "repository": "https://github.com/slipmatio/toolbelt",
