@@ -1,14 +1,16 @@
 export class CappedCollection<T> {
   private chunks: T[][] = []
   private readonly capacity: number
-  private readonly chunkSize = 256
+  private readonly chunkSize: number
   private count = 0
   private headChunkIndex = 0
   private headItemIndex = 0
 
-  constructor(capacity: number) {
+  constructor(capacity: number, chunkSize = 256) {
     if (capacity < 1) throw new Error('Capacity must be positive')
+    if (chunkSize < 1) throw new Error('Chunk size must be positive')
     this.capacity = capacity
+    this.chunkSize = chunkSize
   }
 
   add(item: T): void {
