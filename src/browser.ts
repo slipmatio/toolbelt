@@ -181,7 +181,7 @@ export async function prefetchImages(urls: string | string[]) {
 
   const urlList = Array.isArray(urls) ? urls : [urls]
 
-  return Promise.all(
+  return await Promise.all(
     urlList.map(
       url =>
         new Promise<{ url: string; success: boolean }>(resolve => {
@@ -288,4 +288,19 @@ export function isBot(ssrReturn = true) {
   } catch {
     return true
   }
+}
+
+/**
+ * Reads a GET parameter from the current URL's query string.
+ *
+ * @param name The name of the parameter to retrieve.
+ * @returns The parameter's value as a string, or null if it doesn't exist.
+ */
+export function getParam(name: string) {
+  if (isSSR()) {
+    return null
+  }
+
+  const searchParams = new URLSearchParams(window.location.search)
+  return searchParams.get(name)
 }

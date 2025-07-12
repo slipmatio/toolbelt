@@ -28,7 +28,7 @@ pnpm test         # Run unit tests with Vitest
 pnpm coverage     # Generate test coverage report
 
 # Run a single test file
-pnpm test path/to/mytest.test.ts
+pnpm test path/to/mytest.spec.ts
 ```
 
 #### E2E Testing
