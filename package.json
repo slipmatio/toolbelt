@@ -12,7 +12,10 @@
       "import": "./dist/vue/index.js"
     }
   },
-  "repository": "https://github.com/slipmatio/toolbelt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slipmatio/toolbelt.git"
+  },
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
   "scripts": {
