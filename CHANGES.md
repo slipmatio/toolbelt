@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026.2 (2026-02-07)
+## 2026.2.0 (2026-02-07)
 
 - Feat: added `CappedCollection`
 - Tooling: switched from biome to oxlint
