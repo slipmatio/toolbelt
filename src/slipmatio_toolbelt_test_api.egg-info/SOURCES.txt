@@ -1,8 +1,0 @@
-LICENSE.md
-README.md
-pyproject.toml
-src/slipmatio_toolbelt_test_api.egg-info/PKG-INFO
-src/slipmatio_toolbelt_test_api.egg-info/SOURCES.txt
-src/slipmatio_toolbelt_test_api.egg-info/dependency_links.txt
-src/slipmatio_toolbelt_test_api.egg-info/requires.txt
-src/slipmatio_toolbelt_test_api.egg-info/top_level.txt

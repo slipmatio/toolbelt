@@ -1,25 +1,13 @@
-# CLAUDE.md
+# Slipmat Toolbelt
 
 TypeScript utility library with browser utilities (default export) and Vue Router helpers (`/vue` export).
 
 ## Commands
 
-```bash
-pnpm dev          # Start development server (port 5173)
-pnpm build        # Type check and build the library
-pnpm ts           # Run TypeScript type checking only
-```
-
-### Linting
-
-```bash
-# Format, lint, and organize imports of all files
-pnpm exec biome check --write
-
-
-# Format, lint, and organize imports of specific files
-pnpm exec biome check --write <files>
-```
+- `pnpm dev` - Start development server (port 5173)
+- `pnpm build` - Type check and build the library
+- `pnpm ts` - Type check
+- `pnpm lint` - Lint
 
 ### Testing
 
@@ -48,8 +36,8 @@ pnpm test:e2e
 - 2 spaces indentation
 - Single quotes
 - ES5 trailing commas
-- NEVER add ANY comments or docstrings in the code whatsoever unless explicitly asked to do so
-- ALWAYS lint and format all ts/vue files you touch
+- **Never** add or remove ANY comments or docstrings unless explicitly asked to do so
+- **Always** lint and format the FULL codebase
 
 ### Project Structure
 
@@ -64,11 +52,3 @@ tests/
 ├── unit/           # Unit tests (Vitest)
 └── e2e/            # E2E tests (Playwright)
 ```
-
-### Testing Info
-
-- Unit tests: Vitest with happy-dom
-- E2E tests: Playwright (iPhone SE WebKit, Desktop Firefox)
-- Tests can be co-located: `src/**/*.spec.ts`
-- Dev server runs on port 5173
-- Vue and Vue Router are optional peer dependencies

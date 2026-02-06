@@ -34,3 +34,4 @@ pnpm-debug.log*
 LOCAL_NOTES.md
 test-results
 *.tsbuildinfo
+.venv
