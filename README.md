@@ -86,4 +86,6 @@ Contributions are welcome! Please follow the [code of conduct](https://www.contr
 
 ## Elsewhere
 
-[Follow @uninen](https://twitter.com/uninen) on Twitter
+- Follow [@uninen on X](https://x.com/uninen) or [uninen.net on Bluesky](https://bsky.app/profile/uninen.net)
+- Read my learnings around Vue / TypeScript and other Web dev topics from my [Today I Learned blog](https://til.unessa.net/)
+- If you speak Finnish, check out [Koneoppiblogi](https://koneoppiblogi.uninen.net)
