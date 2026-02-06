@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026.2 (2026-02-07)
+
+- Feat: added `CappedCollection`
+- Tooling: switched from biome to oxlint
+- Meta: changed project versioning to DateVer which makes more sense here
+- Chore: bumped all deps.
+
+## 0.9.1 (2025-04-18)
+
+- Refactor: better `isBot` and better tests.
+
 ## 0.9.1 (2025-04-18)
 
 - Refactor: better `isBot` and better tests.

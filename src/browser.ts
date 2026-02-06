@@ -1,10 +1,4 @@
-export function isSSR() {
-  try {
-    return typeof window === 'undefined' && typeof document === 'undefined'
-  } catch {
-    return true
-  }
-}
+import { isSSR } from './common'
 
 export function hasTimeZoneSupport() {
   if (isSSR()) {
@@ -58,9 +52,9 @@ export function getCookie(name: string) {
   if (document.cookie && document.cookie !== '') {
     const cookies = document.cookie.split(';')
     for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim()
+      const cookie = cookies[i]?.trim()
       // Does this cookie string begin with the name we want?
-      if (cookie.substring(0, name.length + 1) === `${name}=`) {
+      if (cookie && cookie.substring(0, name.length + 1) === `${name}=`) {
         cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
         break
       }
@@ -131,83 +125,6 @@ export function copyToClipboard(content: string) {
   }
 }
 
-/**
- * Checks if the domain of the given URL is in the list of allowed domains.
- */
-export function isAllowedDomain(url: string, allowedDomains: string[]): boolean {
-  try {
-    const parsedUrl = new URL(url)
-    const hostWithPort = parsedUrl.port ? `${parsedUrl.hostname}:${parsedUrl.port}` : parsedUrl.hostname
-
-    return allowedDomains.some(allowedDomain => {
-      const [allowedHost, allowedPort] = allowedDomain.split(':')
-      const [urlHost, _] = hostWithPort.split(':')
-
-      if (allowedPort) {
-        return hostWithPort === allowedDomain
-      }
-
-      return urlHost === allowedHost || urlHost.endsWith(`.${allowedHost}`)
-    })
-  } catch {
-    return false
-  }
-}
-
-/**
- * Basic URL validation that checks if string can be parsed as URL
- */
-export function isValidSecureUrl(url: string) {
-  try {
-    const parsed = new URL(url)
-
-    if (parsed.hostname === 'localhost') {
-      return true
-    }
-
-    return parsed.protocol === 'https:'
-  } catch {
-    return false
-  }
-}
-/**
- * Simple helper to prefetch images
- * @param urls URL or array of URLs to prefetch
- */
-export async function prefetchImages(urls: string | string[]) {
-  if (isSSR()) {
-    return []
-  }
-
-  const urlList = Array.isArray(urls) ? urls : [urls]
-
-  return Promise.all(
-    urlList.map(
-      url =>
-        new Promise<{ url: string; success: boolean }>(resolve => {
-          const img = new Image()
-
-          function cleanup() {
-            img.onload = null
-            img.onerror = null
-          }
-
-          img.onload = () => {
-            cleanup()
-            resolve({ url, success: true })
-          }
-
-          img.onerror = () => {
-            cleanup()
-            resolve({ url, success: false })
-          }
-
-          img.src = url
-        })
-    )
-  )
-}
-
 export function browserIsIE() {
   if (isSSR()) {
     return false
@@ -231,7 +148,7 @@ export function browserIsSupported() {
  * Note: This is a *VERY* basic check and should not be used for security purposes.
  *
  * @param ssrReturn If true, the function will return true when called in SSR mode.
- *  */
+ */
 export function isBot(ssrReturn = true) {
   if (isSSR()) {
     return ssrReturn
@@ -270,7 +187,7 @@ export function isBot(ssrReturn = true) {
       'wordpress',
       'tiktokspider',
     ]
-    const isCommonBot = commonBots.some(pattern => userAgent.includes(pattern))
+    const isCommonBot = commonBots.some((pattern) => userAgent.includes(pattern))
     const hasHeadlessFeatures =
       userAgent.includes('headless') ||
       navigator.webdriver ||

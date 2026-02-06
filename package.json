@@ -1,19 +1,15 @@
 {
   "name": "@slipmatio/toolbelt",
   "type": "module",
-  "version": "0.9.1",
-  "main": "dist/toolbelt.js",
-  "module": "dist/toolbelt.js",
+  "version": "2026.2",
   "exports": {
     ".": {
       "types": "./dist/toolbelt.d.ts",
-      "import": "./dist/toolbelt.js",
-      "require": "./dist/toolbelt.cjs"
+      "import": "./dist/toolbelt.js"
     },
     "./vue": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/vue/index.js",
-      "require": "./dist/vue/index.cjs"
+      "import": "./dist/vue/index.js"
     }
   },
   "repository": "https://github.com/slipmatio/toolbelt",
@@ -26,28 +22,30 @@
     "test:e2e": "DEBUG=0 playwright test --ui",
     "test:ci-e2e": "DEBUG=0 playwright test",
     "coverage": "DEBUG=0 vitest run --coverage",
-    "ts": "DEBUG=0 vue-tsc --build --force"
+    "ts": "DEBUG=0 vue-tsc --build --force",
+    "lint": "oxlint --fix"
   },
   "devDependencies": {
-    "@playwright/test": "^1.54.1",
-    "@tsconfig/node22": "^22.0.2",
-    "@types/node": "^24.0.13",
-    "@vitejs/plugin-vue": "^6.0.0",
-    "@vitest/coverage-v8": "4.0.2",
+    "@playwright/test": "^1.58.2",
+    "@tsconfig/node24": "^24.0.4",
+    "@types/node": "^25.2.1",
+    "@vitejs/plugin-vue": "^6.0.4",
+    "@vitest/coverage-v8": "4.0.18",
     "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.7.0",
-    "happy-dom": "^20.0.0",
-    "typescript": "^5.8.3",
-    "vite": "^7.0.4",
+    "@vue/tsconfig": "^0.8.1",
+    "happy-dom": "^20.5.0",
+    "oxlint": "^1.43.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "4.0.2",
-    "vue": "^3.5.17",
-    "vue-router": "^5.0.0",
-    "vue-tsc": "^3.0.1"
+    "vitest": "4.0.18",
+    "vue": "^3.5.27",
+    "vue-router": "^5.0.2",
+    "vue-tsc": "^3.2.4"
   },
   "peerDependencies": {
-    "vue": "^3.5.17",
-    "vue-router": "^4.5.1"
+    "vue": "~3",
+    "vue-router": "^5"
   },
   "peerDependenciesMeta": {
     "vue": {
