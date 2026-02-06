@@ -33,9 +33,9 @@ export class CappedCollection<T> {
 
     const lastChunk = this.chunks[this.chunks.length - 1]
 
-    if (lastChunk.length === this.chunkSize) {
+    if (lastChunk && lastChunk.length === this.chunkSize) {
       this.chunks.push([item])
-    } else {
+    } else if (lastChunk) {
       lastChunk.push(item)
     }
 
@@ -43,7 +43,7 @@ export class CappedCollection<T> {
       this.count++
     } else {
       this.headItemIndex++
-      if (this.headItemIndex === this.chunks[this.headChunkIndex].length) {
+      if (this.headItemIndex === this.chunks[this.headChunkIndex]?.length) {
         this.headChunkIndex++
         this.headItemIndex = 0
       }
@@ -72,17 +72,22 @@ export class CappedCollection<T> {
   get(): T[] {
     if (this.chunks.length === 0) return []
 
-    const result = new Array(this.count)
+    const result = Array.from({ length: this.count }) as T[]
     let resultIdx = 0
 
-    for (let i = this.headItemIndex; i < this.chunks[this.headChunkIndex].length; i++) {
-      result[resultIdx++] = this.chunks[this.headChunkIndex][i]
+    const headChunk = this.chunks[this.headChunkIndex]
+    if (headChunk) {
+      for (let i = this.headItemIndex; i < headChunk.length; i++) {
+        result[resultIdx++] = headChunk[i]!
+      }
     }
 
     for (let chunkIdx = this.headChunkIndex + 1; chunkIdx < this.chunks.length; chunkIdx++) {
       const chunk = this.chunks[chunkIdx]
-      for (let i = 0; i < chunk.length; i++) {
-        result[resultIdx++] = chunk[i]
+      if (chunk) {
+        for (let i = 0; i < chunk.length; i++) {
+          result[resultIdx++] = chunk[i]!
+        }
       }
     }
 
@@ -130,7 +135,7 @@ export function isAllowedDomain(url: string, allowedDomains: string[]): boolean 
         return hostWithPort === allowedDomain
       }
 
-      return urlHost === allowedHost || urlHost.endsWith(`.${allowedHost}`)
+      return urlHost === allowedHost || (urlHost && urlHost.endsWith(`.${allowedHost}`))
     })
   } catch {
     return false

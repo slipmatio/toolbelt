@@ -148,7 +148,7 @@ describe('CappedCollection', () => {
     collection.add(arr)
 
     const retrieved = collection.get()
-    retrieved[0].push(4)
+    retrieved[0]?.push(4)
 
     expect(collection.get()[0]).toEqual([1, 2, 3, 4])
     expect(retrieved).not.toBe(collection.get())
