@@ -24,11 +24,11 @@ pnpm test path/to/mytest.spec.ts
 E2E tests require a backend server running:
 
 ```bash
-# 1. First, start the backend server
+# 1. start the backend server
 uv run uvicorn api:app --reload
 
-# 2. Then run E2E tests with Playwright UI
-pnpm test:e2e
+# 2. Then run E2E tests in ci-mode (headless) with Playwright
+pnpm test:ci-e2e
 ```
 
 ### Code Style
