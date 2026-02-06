@@ -28,8 +28,6 @@ jobs:
 
       - uses: JS-DevTools/npm-publish@4ce4bd0f334d5316473155078da1955d42148494 # v4.1.4
         id: publish
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Tag
         if: ${{ steps.publish.outputs.type }}
