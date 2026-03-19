@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
         with:
           version: 10
           run_install: false
@@ -37,13 +37,13 @@ jobs:
       - name: Create Tag
         if: ${{ steps.publish.outputs.type }}
         id: create_tag
-        uses: jaywcjlove/create-tag-action@65ebf9d9302994fc17481c71293bbc97d94bf8e7 # v2.2.0
+        uses: jaywcjlove/create-tag-action@4b8582e914640edc3602f7d9907f3821bf84bdc7 # v2.3.0
         with:
           package-path: ./package.json
 
       - name: Generate Changelog
         id: changelog
-        uses: jaywcjlove/changelog-generator@375efb7dcccd624b195b84603362d68950a7c07e # v2.2.6
+        uses: jaywcjlove/changelog-generator@00eecde44f40feee4b5c96fe16e5cfdeab76336a # v2.4.0
         if: steps.create_tag.outputs.successful
         with:
           head-ref: ${{steps.create_tag.outputs.version}}
@@ -54,7 +54,7 @@ jobs:
         run: echo "${{ steps.changelog.outputs.changelog }}"
 
       - name: Create Release
-        uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
+        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
         if: steps.create_tag.outputs.successful
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
