@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026.9.0 (2026-09-22)
+
+- Fix: security issue with local urls.
+- Chore: bumped all deps.
+
 ## 2026.2.0 (2026-02-07)
 
 - Feat: added `CappedCollection`
