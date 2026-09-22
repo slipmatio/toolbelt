@@ -1,14 +1,14 @@
 {
   "name": "@slipmatio/toolbelt",
   "type": "module",
-  "version": "2026.2.0",
+  "version": "2026.9.0",
   "exports": {
     ".": {
       "types": "./dist/toolbelt.d.ts",
       "import": "./dist/toolbelt.js"
     },
     "./vue": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/vue/index.d.ts",
       "import": "./dist/vue/index.js"
     }
   },
@@ -18,6 +18,7 @@
   },
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
+  "packageManager": "pnpm@12.5.1",
   "scripts": {
     "dev": "DEBUG=0 vite",
     "build": "DEBUG=0 vue-tsc --build --force && vite build",
@@ -29,22 +30,23 @@
     "lint": "oxlint --fix"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
-    "@tsconfig/node24": "^24.0.4",
-    "@types/node": "^25.2.1",
-    "@vitejs/plugin-vue": "^6.0.4",
-    "@vitest/coverage-v8": "4.1.0",
-    "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.9.0",
-    "happy-dom": "^20.5.0",
-    "oxlint": "^1.43.0",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.1",
-    "vite-plugin-dts": "^4.5.4",
-    "vitest": "4.1.0",
-    "vue": "^3.5.27",
-    "vue-router": "^5.0.2",
-    "vue-tsc": "^3.2.4"
+    "@microsoft/api-extractor": "^7.59.1",
+    "@playwright/test": "^1.63.0",
+    "@tsconfig/node24": "^24.0.5",
+    "@types/node": "^26.6.2",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "@vitest/coverage-v8": "5.0.1",
+    "@vue/test-utils": "^2.5.1",
+    "@vue/tsconfig": "^0.9.1",
+    "happy-dom": "^20.14.5",
+    "oxlint": "^1.85.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.0",
+    "vite-plugin-dts": "^5.1.1",
+    "vitest": "5.0.1",
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1",
+    "vue-tsc": "^3.3.11"
   },
   "peerDependencies": {
     "vue": "~3",
