@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026.9.1 (2026-09-23)
+
+- Fix: release permissions, verified npm publication and tags, and retryable GitHub releases.
+
 ## 2026.9.0 (2026-09-23)
 
 - Fix: security issue with local urls.

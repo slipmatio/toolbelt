@@ -5,20 +5,22 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/release.yml"
-      - ".github/workflows/tests.yml"
-      - "pnpm-lock.yaml"
-      - "src/**/*.ts"
-      - "src/**/*.vue"
-      - "tests/e2e/**/*.spec.ts"
+      - '.github/workflows/release.yml'
+      - '.github/workflows/tests.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'src/**/*.ts'
+      - 'src/**/*.vue'
+      - 'tests/**/*.spec.ts'
   pull_request:
     paths:
-      - ".github/workflows/release.yml"
-      - ".github/workflows/tests.yml"
-      - "pnpm-lock.yaml"
-      - "src/**/*.ts"
-      - "src/**/*.vue"
-      - "tests/e2e/**/*.spec.ts"
+      - '.github/workflows/release.yml'
+      - '.github/workflows/tests.yml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'src/**/*.ts'
+      - 'src/**/*.vue'
+      - 'tests/**/*.spec.ts'
   workflow_dispatch:
 
 concurrency:
@@ -48,7 +50,7 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Type Check
         run: pnpm ts
