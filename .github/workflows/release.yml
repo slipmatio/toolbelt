@@ -54,7 +54,8 @@ jobs:
             echo "commit=$(git rev-parse "refs/tags/$tag^{commit}")" >> "$GITHUB_OUTPUT"
           else
             echo "tag_exists=false" >> "$GITHUB_OUTPUT"
-            echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+            published_commit="$(npm view "$(node -p 'require("./package.json").name')@${tag#v}" gitHead --registry=https://registry.npmjs.org 2>/dev/null || true)"
+            echo "commit=${published_commit:-$(git rev-parse HEAD)}" >> "$GITHUB_OUTPUT"
           fi
 
       - uses: JS-DevTools/npm-publish@0fd2f4369c5d6bcfcde6091a7c527d810b9b5c3f # v4.1.5
@@ -84,9 +85,12 @@ jobs:
 
       - name: Create Tag
         if: steps.version.outputs.tag_exists == 'false'
-        uses: jaywcjlove/create-tag-action@4b8582e914640edc3602f7d9907f3821bf84bdc7 # v2.3.0
-        with:
-          package-path: ./package.json
+        env:
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          RELEASE_COMMIT: ${{ steps.version.outputs.commit }}
+        run: |
+          git tag "$RELEASE_TAG" "$RELEASE_COMMIT"
+          git push origin "refs/tags/$RELEASE_TAG"
 
       - name: Verify Tag
         env:
