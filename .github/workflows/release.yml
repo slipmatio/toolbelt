@@ -54,7 +54,14 @@ jobs:
             echo "commit=$(git rev-parse "refs/tags/$tag^{commit}")" >> "$GITHUB_OUTPUT"
           else
             echo "tag_exists=false" >> "$GITHUB_OUTPUT"
-            echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+            name="$(node -p 'require("./package.json").name')"
+            version="$(node -p 'require("./package.json").version')"
+            if published_commit="$(npm view "$name@$version" gitHead --registry=https://registry.npmjs.org 2>/dev/null)" && [ -n "$published_commit" ]; then
+              git cat-file -e "$published_commit^{commit}"
+              echo "commit=$published_commit" >> "$GITHUB_OUTPUT"
+            else
+              echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+            fi
           fi
 
       - uses: JS-DevTools/npm-publish@0fd2f4369c5d6bcfcde6091a7c527d810b9b5c3f # v4.1.5
@@ -70,11 +77,13 @@ jobs:
           PACKAGE_VERSION: ${{ steps.version.outputs.version }}
           RELEASE_COMMIT: ${{ steps.version.outputs.commit }}
         run: |
-          for attempt in 1 2 3 4 5; do
-            if published_commit="$(npm view "$PACKAGE_NAME@$PACKAGE_VERSION" gitHead --registry=https://registry.npmjs.org)"; then
+          published_commit=''
+          for attempt in $(seq 1 40); do
+            if published_commit="$(npm view "$PACKAGE_NAME@$PACKAGE_VERSION" gitHead --registry=https://registry.npmjs.org 2>/dev/null)" && [ -n "$published_commit" ]; then
               break
             fi
-            sleep 5
+            echo "Waiting for npm registry ($attempt/40)"
+            sleep 15
           done
           if [ "$published_commit" != "$RELEASE_COMMIT" ]; then
             echo '::error::npm publication is missing or points to a different commit. Do not reuse a published version.'
@@ -84,9 +93,12 @@ jobs:
 
       - name: Create Tag
         if: steps.version.outputs.tag_exists == 'false'
-        uses: jaywcjlove/create-tag-action@4b8582e914640edc3602f7d9907f3821bf84bdc7 # v2.3.0
-        with:
-          package-path: ./package.json
+        env:
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          RELEASE_COMMIT: ${{ steps.version.outputs.commit }}
+        run: |
+          git tag "$RELEASE_TAG" "$RELEASE_COMMIT"
+          git push origin "refs/tags/$RELEASE_TAG"
 
       - name: Verify Tag
         env:
@@ -95,6 +107,22 @@ jobs:
         run: |
           git fetch origin "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG"
           test "$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")" = "$RELEASE_COMMIT"
+
+      - name: Wait for Tag in GitHub API
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          base="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+          for attempt in $(seq 1 40); do
+            if gh api "repos/$GITHUB_REPOSITORY/compare/$base...$RELEASE_TAG" --jq .status > /dev/null 2>&1; then
+              exit 0
+            fi
+            echo "Waiting for $base...$RELEASE_TAG compare ($attempt/40)"
+            sleep 15
+          done
+          echo "::error::GitHub API cannot compare $base...$RELEASE_TAG"
+          exit 1
 
       - name: Generate Changelog
         id: changelog
