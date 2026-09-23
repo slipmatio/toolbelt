@@ -3,17 +3,9 @@ import { isAllowedDomain, isValidSecureUrl } from '@/utils'
 import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
 import { useRoute } from 'vue-router'
 
-const localOrigin = 'http://local.invalid'
-
 function isLocalPath(value: string): boolean {
-  if (!value.startsWith('/')) {
-    return false
-  }
-  try {
-    return new URL(value, localOrigin).origin === localOrigin
-  } catch {
-    return false
-  }
+  const path = value.replace(/[\t\n\r]/g, '')
+  return value.startsWith('/') && !path.startsWith('//') && !path.startsWith('/\\')
 }
 
 /**

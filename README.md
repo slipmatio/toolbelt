@@ -1,6 +1,6 @@
 # Slipmat Toolbelt
 
-TypeScript utility library for Web development. These small utilities
+TypeScript utilities for browsers and Vue Router.
 
 ## Installation
 
@@ -61,12 +61,16 @@ collection.clear()
 
 ### Vue Utilities
 
+Requires Vue 3 and Vue Router 5.
+
 ```typescript
 import { getNext, getNextPath } from '@slipmatio/toolbelt/vue'
 ```
 
 - `getNext(allowedDomains: string[], router?: Router)` - Get validated 'next' query param (allows URLs to specified domains)
 - `getNextPath(router?: Router)` - Get validated 'next' query param (local paths only)
+
+Both return `/` for missing or invalid input. Pass `router` outside component setup.
 
 ## Development
 

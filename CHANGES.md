@@ -1,9 +1,10 @@
 # Changelog
 
-## 2026.9.0 (2026-09-22)
+## 2026.9.0 (2026-09-23)
 
 - Fix: security issue with local urls.
 - Chore: bumped all deps.
+- Docs: cleaned up README.
 
 ## 2026.2.0 (2026-02-07)
 
