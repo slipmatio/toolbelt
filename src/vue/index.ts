@@ -3,6 +3,11 @@ import { isAllowedDomain, isValidSecureUrl } from '@/utils'
 import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
 import { useRoute } from 'vue-router'
 
+function isLocalPath(value: string): boolean {
+  const path = value.replace(/[\t\n\r]/g, '')
+  return value.startsWith('/') && !path.startsWith('//') && !path.startsWith('/\\')
+}
+
 /**
  * Safely extracts and validates the 'next' query parameter from the current route. Allows only local paths.
  *
@@ -18,7 +23,7 @@ export function getNextPath(router?: Router): string {
   }
 
   let next = '/'
-  if (route.query?.next && isString(route.query.next) && route.query.next.startsWith('/')) {
+  if (route.query?.next && isString(route.query.next) && isLocalPath(route.query.next)) {
     next = route.query.next as string
   }
   return next
@@ -42,7 +47,7 @@ export function getNext(allowedDomains: string[], router?: Router): string {
 
   let next = '/'
   // if next is a valid local path
-  if (route.query?.next && isString(route.query.next) && route.query.next.startsWith('/')) {
+  if (route.query?.next && isString(route.query.next) && isLocalPath(route.query.next)) {
     next = route.query.next as string
     // if next is a valid URL with allowed domain
   } else if (

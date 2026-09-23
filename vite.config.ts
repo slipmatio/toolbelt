@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts'
 export default defineConfig({
   plugins: [
     vue(),
-    dts({ tsconfigPath: './tsconfig.app.json', include: ['src/**/*.ts', 'src/**/*.vue'], rollupTypes: true }),
+    dts({ tsconfigPath: './tsconfig.app.json', include: ['src/**/*.ts', 'src/**/*.vue'], bundleTypes: true }),
   ],
   resolve: {
     alias: {
@@ -18,15 +18,15 @@ export default defineConfig({
     emptyOutDir: true,
     lib: {
       entry: {
-        toolbelt: resolve(__dirname, 'src/toolbelt.ts'),
-        'vue/index': resolve(__dirname, 'src/vue/index.ts'),
+        toolbelt: resolve(import.meta.dirname, 'src/toolbelt.ts'),
+        'vue/index': resolve(import.meta.dirname, 'src/vue/index.ts'),
       },
       formats: ['es'],
       fileName: (_format, entryName) => {
         return `${entryName}.js`
       },
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['vue', 'vue-router'],
       output: {
         preserveModules: false,
