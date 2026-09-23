@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: publish
+  group: publish-main
   cancel-in-progress: false
 
 jobs:
@@ -29,6 +29,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
       - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           run_install: false
@@ -41,30 +44,76 @@ jobs:
           pnpm test --run
           pnpm build
 
-      - name: Publish to npm
-        id: npm
+      - name: Read release version
+        id: version
         run: |
-          name="$(node -p 'require("./package.json").name')"
-          version="$(node -p 'require("./package.json").version')"
-          if [ -n "$(npm view "$name@$version" version 2>/dev/null)" ]; then
-            echo "$name@$version is already on npm"
-            commit="$(npm view "$name@$version" gitHead)"
+          node -e 'const p = require("./package.json"); console.log(`name=${p.name}\nversion=${p.version}\ntag=v${p.version}`)' >> "$GITHUB_OUTPUT"
+          tag="v$(node -p 'require("./package.json").version')"
+          if git show-ref --verify --quiet "refs/tags/$tag"; then
+            echo "tag_exists=true" >> "$GITHUB_OUTPUT"
+            echo "commit=$(git rev-parse "refs/tags/$tag^{commit}")" >> "$GITHUB_OUTPUT"
           else
-            npm publish --provenance --access public
-            commit="$(git rev-parse HEAD)"
+            echo "tag_exists=false" >> "$GITHUB_OUTPUT"
+            echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
-          test -n "$commit"
-          echo "tag=v$version" >> "$GITHUB_OUTPUT"
-          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+
+      - uses: JS-DevTools/npm-publish@0fd2f4369c5d6bcfcde6091a7c527d810b9b5c3f # v4.1.5
+        if: steps.version.outputs.commit == github.sha
+        with:
+          registry: https://registry.npmjs.org
+          access: public
+          provenance: true
+
+      - name: Verify npm publication
+        env:
+          PACKAGE_NAME: ${{ steps.version.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
+          RELEASE_COMMIT: ${{ steps.version.outputs.commit }}
+        run: |
+          for attempt in $(seq 1 40); do
+            if published_commit="$(npm view "$PACKAGE_NAME@$PACKAGE_VERSION" gitHead --registry=https://registry.npmjs.org)"; then
+              break
+            fi
+            sleep 15
+          done
+          if [ "$published_commit" != "$RELEASE_COMMIT" ]; then
+            echo '::error::npm publication is missing or points to a different commit. Do not reuse a published version.'
+            exit 1
+          fi
+          echo "Verified $PACKAGE_NAME@$PACKAGE_VERSION on npm at $published_commit"
+
+      - name: Create Tag
+        if: steps.version.outputs.tag_exists == 'false'
+        uses: jaywcjlove/create-tag-action@4b8582e914640edc3602f7d9907f3821bf84bdc7 # v2.3.0
+        with:
+          package-path: ./package.json
+
+      - name: Verify Tag
+        env:
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          RELEASE_COMMIT: ${{ steps.version.outputs.commit }}
+        run: |
+          git fetch origin "refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG"
+          test "$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")" = "$RELEASE_COMMIT"
+
+      - name: Generate Changelog
+        id: changelog
+        uses: jaywcjlove/changelog-generator@00eecde44f40feee4b5c96fe16e5cfdeab76336a # v2.4.0
+        with:
+          head-ref: ${{ steps.version.outputs.commit }}
+          filter-author: (Uninen|renovate-bot)
+          show-emoji: false
 
       - name: Create Release
         uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: ${{ steps.npm.outputs.tag }}
-          tag: ${{ steps.npm.outputs.tag }}
-          commit: ${{ steps.npm.outputs.commit }}
-          generateReleaseNotes: true
           skipIfReleaseExists: true
+          name: ${{ steps.version.outputs.tag }}
+          tag: ${{ steps.version.outputs.tag }}
           body: |
+            ${{ steps.changelog.outputs.changelog }}
+
+            Compare changes: ${{ steps.changelog.outputs.compareurl }}
+
             Read more from the Changelog: https://github.com/slipmatio/toolbelt/blob/main/CHANGES.md
