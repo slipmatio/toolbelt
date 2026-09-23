@@ -46,7 +46,11 @@ jobs:
 
       - name: Read release version
         id: version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          base="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)"
+          echo "base=$base" >> "$GITHUB_OUTPUT"
           node -e 'const p = require("./package.json"); console.log(`name=${p.name}\nversion=${p.version}\ntag=v${p.version}`)' >> "$GITHUB_OUTPUT"
           tag="v$(node -p 'require("./package.json").version')"
           if git show-ref --verify --quiet "refs/tags/$tag"; then
@@ -104,6 +108,7 @@ jobs:
         id: changelog
         uses: jaywcjlove/changelog-generator@00eecde44f40feee4b5c96fe16e5cfdeab76336a # v2.4.0
         with:
+          base-ref: ${{ steps.version.outputs.base }}
           head-ref: ${{ steps.version.outputs.commit }}
           filter-author: (Uninen|renovate-bot)
           show-emoji: false
@@ -118,6 +123,6 @@ jobs:
           body: |
             ${{ steps.changelog.outputs.changelog }}
 
-            Compare changes: ${{ steps.changelog.outputs.compareurl }}
+            Compare changes: https://github.com/${{ github.repository }}/compare/${{ steps.version.outputs.base }}...${{ steps.version.outputs.tag }}
 
             Read more from the Changelog: https://github.com/slipmatio/toolbelt/blob/main/CHANGES.md
