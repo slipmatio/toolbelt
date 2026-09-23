@@ -11,10 +11,10 @@ test('getCookie should work', async ({ browser }) => {
   // This works locally with normal browser + Playwright no, tho
   const context = await browser.newContext()
   await context.addCookies([{ name: 'test-cookie', value: 'this-is-a-test', url: 'http://localhost:5173/' }])
-  const page = await context.newPage()
-  await page.goto('/')
   const cookies = await context.cookies()
   expect(cookies).toHaveLength(1)
+  const page = await context.newPage()
+  await page.goto('/')
   await page.waitForSelector('[data-testid=cookie-results]')
 
   await expect(page.getByTestId('cookie-result1')).toHaveText('null')
